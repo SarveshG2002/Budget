@@ -1,0 +1,4 @@
+To Install database packages
+pip install flask-sqlalchemy
+pip install --upgrade mysql-connector-python
+pip install pymysql

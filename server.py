@@ -1,8 +1,13 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy  # Import SQLAlchemy
 
 app = Flask(__name__)
 
-# Import routes from routes.py
+# Configure SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3310/budget'
+db = SQLAlchemy(app)
+
+# Import routes from authRoute.py
 from authRoute import *
 
 if __name__ == '__main__':

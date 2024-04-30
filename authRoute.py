@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for
-from server import app  # Assuming your Flask app instance is named 'app'
+from server import app
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Your login route implementation goes here
     if request.method == 'POST':
         # Check username and password (this is just a placeholder, replace it with your authentication logic)
         username = request.form['username']
@@ -17,3 +18,8 @@ def login():
     else:
         # Render the login page
         return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    # Placeholder for dashboard logic
+    return render_template('dashboard.html')
