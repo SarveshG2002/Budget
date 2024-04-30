@@ -1,0 +1,32 @@
+<!-- messages.html -->
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+{% if 'error' in session %}
+<script>
+    // Get the error message from the session and assign it to a JavaScript variable
+    var errorMessage = "{{ session.pop('error') }}";
+
+    // Log the error message to the console
+    console.log(errorMessage);
+
+    // Display the error message as a toast using toastr.js
+    $(document).ready(function() {
+        toastr.error(errorMessage);
+    });
+</script>
+{% endif %}
+
+{% if 'success' in session %}
+<script>
+    // Get the success message from the session and assign it to a JavaScript variable
+    var successMessage = "{{ session.pop('success') }}";
+
+    // Log the success message to the console
+    console.log(successMessage);
+
+    // Display the success message as a toast using toastr.js
+    $(document).ready(function() {
+        toastr.success(successMessage);
+    });
+</script>
+{% endif %}
+

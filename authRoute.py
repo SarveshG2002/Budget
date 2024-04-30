@@ -20,10 +20,13 @@ def login():
             session['user_id'] = user.id
             session['username'] = user.username
             # Redirect to dashboard upon successful login
+            success = "Login Successfull"
+            session['success'] = success
             return redirect(url_for('dashboard'))
         else:
-            error = 'Invalid username or password'
-            return render_template('login.html', error=error)
+            # error = 'Invalid username or password'
+            session['error'] = 'Invalid username or password'
+            return render_template('login.html')
     else:
         # Render the login page
         return render_template('login.html')
