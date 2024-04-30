@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for, session
 from server import app
 from models import Users
+from decorators import login_required  # Import the login_required decorator
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -27,6 +29,7 @@ def login():
         return render_template('login.html')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
