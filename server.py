@@ -27,10 +27,12 @@ def inject_common_variables():
         },
         # Add more sidebar items as needed
     ]
-    return dict(sidebar=sidebar)
+    username = session.get('username')
+    return dict(sidebar=sidebar,username=username)
 
 # Import routes from authRoute.py
 from authRoute import *
+from paymentRoute import *
 
 if __name__ == '__main__':
     app.run()

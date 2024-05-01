@@ -38,10 +38,10 @@ def dashboard():
         return redirect(url_for('login'))
     # Retrieve user information from session
     user_id = session.get('user_id')
-    username = session.get('username')
+    
     
     # Placeholder for dashboard logic
-    return render_template('dashboard.html', username=username)
+    return render_template('dashboard.html')
 
 @app.route('/logout')
 def logout():

@@ -2,7 +2,7 @@
     <div class="sidebardiv">
         <div class="navigations">
             {% for item in sidebar %}
-            <div class="navigation">
+            <div class="navigation" onclick="window.location.href=`{{ url_for(item.link) }}`">
                 {% if item.indicator == item.page %}
                 <div class="indicator">
 
