@@ -8,6 +8,27 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3310/bu
 db = SQLAlchemy(app)
 app.secret_key = '1234567890987654321'
 
+@app.context_processor
+def inject_common_variables():
+    sidebar = [
+        {
+            'name': 'Home',
+            'link': 'dashboard',
+            'page': 'dashboard',
+            'icon': 'home',
+            'indicator': request.endpoint
+        },
+        {
+            'name': 'New Payment',
+            'link': 'new_payment',
+            'page': 'new_payment',
+            'icon': 'shopping_bag',
+            'indicator': request.endpoint
+        },
+        # Add more sidebar items as needed
+    ]
+    return dict(sidebar=sidebar)
+
 # Import routes from authRoute.py
 from authRoute import *
 

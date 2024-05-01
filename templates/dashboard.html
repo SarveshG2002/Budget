@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Dashboard</title>
-</head>
+    {% include 'header.html' %}
 <body>
     
-    {% include 'header.html' %}
+    {% include 'header-layout.html' %}
+    
 
-    <h1>Welcome to the Dashboard, {{ username }}!</h1>
+    <div class="side_main">
+        {% include 'sidebar.html' %}    
+
+        <div class="main">
+            <h1>Welcome to the Dashboard, {{ username }}!</h1>
+            <ul>
+                
+            </ul>
+        
+        </div>
+    </div>
+
+
     {% include 'footer.html' %}
 </body>
 </html>

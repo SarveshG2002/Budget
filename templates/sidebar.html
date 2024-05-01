@@ -1,0 +1,33 @@
+<div class="sidebar">
+    <div class="sidebardiv">
+        <div class="navigations">
+            {% for item in sidebar %}
+            <div class="navigation">
+                {% if item.indicator == item.page %}
+                <div class="indicator">
+
+                </div>
+                {% else %}
+                <div class="">
+
+                </div>
+                {% endif %}
+                
+                <div class="inditext">
+                    <span class="material-symbols-outlined">
+                        {{ item.icon }}
+                    </span>
+                    &nbsp;&nbsp;
+                    {{ item.name }}
+                    {{ item.current }}
+                </div>
+            </div>
+            
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+</div>
