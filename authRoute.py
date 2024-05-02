@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, session
-from server import app
+from flask_app import app
 from models import Users
 from decorators import login_required  # Import the login_required decorator
 

@@ -25,6 +25,20 @@ def inject_common_variables():
             'icon': 'shopping_bag',
             'indicator': request.endpoint
         },
+        {
+            'name': 'Payment List',
+            'link': 'new_payment',
+            'page': 'payment_list',
+            'icon': 'shopping_bag',
+            'indicator': request.endpoint
+        },
+        {
+            'name': 'Add Category',
+            'link': 'category',
+            'page': 'category',
+            'icon': 'shopping_bag',
+            'indicator': request.endpoint
+        }
         # Add more sidebar items as needed
     ]
     username = session.get('username')
@@ -33,6 +47,7 @@ def inject_common_variables():
 # Import routes from authRoute.py
 from authRoute import *
 from paymentRoute import *
+from categoryRoute import *
 
 if __name__ == '__main__':
     app.run()
