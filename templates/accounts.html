@@ -14,7 +14,7 @@
             <!-- <div class="container mt-5"> -->
             <div class="card">
                 <div class="card-header">
-                    Add Category
+                    Add Account
                 </div>
                 <div class="card-body">
                     
@@ -24,15 +24,22 @@
                     <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
                         <div class="col-md-12 row">
                             <div class="col-md-6 form-group">
-                                <label for="category_name">Password</label>
-                                <input type="text" class="form-control" id="category_name" name="category_name"
-                                placeholder="Enter Here">
+                                <label for="account_name">Account Name</label>
+                                <input type="text" class="form-control" id="account_name" name="account_name"
+                                placeholder="Enter Here" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                
+                                <label for="opening">Opening Balance</label>
+                                <input type="text" class="form-control" id="opening" name="opening"
+                                placeholder="Enter Here" required>
                             </div>
-                            
-                            <div class="col-md-6 mt-3 form-group">
+
+                            <div class="col-md-6 form-group">
+                                <label for="desc">Description</label>
+                                <textarea name="desc" id="desc" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <br><br>
+                            <div class="col-md-12 mt-12 form-group mt-3">
                                 <input type="submit" name="submit" value="Add" class="btn btn-primary">
                             </div>
             
@@ -48,7 +55,7 @@
             <br>
             <div class="card">
                 <div class="card-header">
-                    Categories
+                    Accounts List
                 </div>
                 <div class="card-body">
                     <table class="table">
