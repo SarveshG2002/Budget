@@ -17,7 +17,7 @@
                     Add Account
                 </div>
                 <div class="card-body">
-                    
+
 
 
 
@@ -26,12 +26,12 @@
                             <div class="col-md-6 form-group">
                                 <label for="account_name">Account Name</label>
                                 <input type="text" class="form-control" id="account_name" name="account_name"
-                                placeholder="Enter Here" required>
+                                    placeholder="Enter Here" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="opening">Opening Balance</label>
                                 <input type="text" class="form-control" id="opening" name="opening"
-                                placeholder="Enter Here" required>
+                                    placeholder="Enter Here" required>
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -42,8 +42,8 @@
                             <div class="col-md-12 mt-12 form-group mt-3">
                                 <input type="submit" name="submit" value="Add" class="btn btn-primary">
                             </div>
-            
-            
+
+
                         </div>
                     </form>
 
@@ -62,14 +62,24 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%;">Sr.</th>
-                                <th style="width: 70%;">Category Name</th>
+                                <th style="width: 70%;">Account Name</th>
+                                <th style="width: 70%;">Opening Balance</th>
+                                <th style="width: 70%;">Current Balance</th>
                                 <th style="width: 20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for account in accounts %}
                             <tr>
-
+                                <td>{{ loop.index }}</td>
+                                <td>{{ account.acc_name }}</td>
+                                <td>{{ account.opening_balance }}</td>
+                                <td>0</td> <!-- Display the current balance as 0 -->
+                                <td>
+                                    <!-- Add action buttons here -->
+                                </td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

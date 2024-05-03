@@ -31,5 +31,7 @@ def accounts():
             return redirect(url_for('accounts'))
 
     else:
+        accounts = Account.query.all()
         # Render the accounts page
-        return render_template('accounts.html')
+        # print(accounts)
+        return render_template('accounts.html', accounts=accounts)
