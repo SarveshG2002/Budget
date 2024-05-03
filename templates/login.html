@@ -1,20 +1,389 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class=" -webkit-">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+
+
+
+
+    <title>Budget</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style media="" data-href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        button,
+        hr,
+        input {
+            overflow: visible
+        }
+
+        audio,
+        canvas,
+        progress,
+        video {
+            display: inline-block
+        }
+
+        progress,
+        sub,
+        sup {
+            vertical-align: baseline
+        }
+
+        html {
+            font-family: sans-serif;
+            line-height: 1.15;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            margin: 0
+        }
+
+        menu,
+        article,
+        aside,
+        details,
+        footer,
+        header,
+        nav,
+        section {
+            display: block
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: .67em 0
+        }
+
+        figcaption,
+        figure,
+        main {
+            display: block
+        }
+
+        figure {
+            margin: 1em 40px
+        }
+
+        hr {
+            box-sizing: content-box;
+            height: 0
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: monospace, monospace;
+            font-size: 1em
+        }
+
+        a {
+            background-color: transparent;
+            -webkit-text-decoration-skip: objects
+        }
+
+        a:active,
+        a:hover {
+            outline-width: 0
+        }
+
+        abbr[title] {
+            border-bottom: none;
+            text-decoration: underline;
+            text-decoration: underline dotted
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        dfn {
+            font-style: italic
+        }
+
+        mark {
+            background-color: #ff0;
+            color: #000
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        audio:not([controls]) {
+            display: none;
+            height: 0
+        }
+
+        img {
+            border-style: none
+        }
+
+        svg:not(:root) {
+            overflow: hidden
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: sans-serif;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0
+        }
+
+        button,
+        input {}
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        [type=submit],
+        [type=reset],
+        button,
+        html [type=button] {
+            -webkit-appearance: button
+        }
+
+        [type=button]::-moz-focus-inner,
+        [type=reset]::-moz-focus-inner,
+        [type=submit]::-moz-focus-inner,
+        button::-moz-focus-inner {
+            border-style: none;
+            padding: 0
+        }
+
+        [type=button]:-moz-focusring,
+        [type=reset]:-moz-focusring,
+        [type=submit]:-moz-focusring,
+        button:-moz-focusring {
+            outline: ButtonText dotted 1px
+        }
+
+        fieldset {
+            border: 1px solid silver;
+            margin: 0 2px;
+            padding: .35em .625em .75em
+        }
+
+        legend {
+            box-sizing: border-box;
+            color: inherit;
+            display: table;
+            max-width: 100%;
+            padding: 0;
+            white-space: normal
+        }
+
+        progress {}
+
+        textarea {
+            overflow: auto
+        }
+
+        [type=checkbox],
+        [type=radio] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        [type=number]::-webkit-inner-spin-button,
+        [type=number]::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        [type=search]::-webkit-search-cancel-button,
+        [type=search]::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        [hidden],
+        template {
+            display: none
+        }
+
+        /*# sourceMappingURL=normalize.min.css.map */
+    </style>
+
+
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Raleway", sans-serif;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container:hover .top:before,
+        .container:hover .top:after,
+        .container:hover .bottom:before,
+        .container:hover .bottom:after,
+        .container:active .top:before,
+        .container:active .top:after,
+        .container:active .bottom:before,
+        .container:active .bottom:after {
+            margin-left: 200px;
+            transform-origin: -200px 50%;
+            transition-delay: 0s;
+        }
+
+        .container:hover .center,
+        .container:active .center {
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
+        .top:before,
+        .top:after,
+        .bottom:before,
+        .bottom:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 200vmax;
+            height: 200vmax;
+            top: 50%;
+            left: 50%;
+            margin-top: -100vmax;
+            transform-origin: 0 50%;
+            transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+            z-index: 10;
+            opacity: 0.65;
+            transition-delay: 0.2s;
+        }
+
+        .top:before {
+            transform: rotate(45deg);
+            background: #e46569;
+        }
+
+        .top:after {
+            transform: rotate(135deg);
+            background: #ecaf81;
+        }
+
+        .bottom:before {
+            transform: rotate(-45deg);
+            background: #60b8d4;
+        }
+
+        .bottom:after {
+            transform: rotate(-135deg);
+            background: #3745b5;
+        }
+
+        .center {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+            transition-delay: 0s;
+            color: #333;
+        }
+
+        .center input {
+            width: 100%;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 1px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+    </style>
+
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+
 </head>
-<body>
-    {% include 'header.html' %}
-    <h1>Login</h1>
-    <form action="{{ url_for('login') }}" method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <button type="submit">Login</button>
-    </form>
+
+<body translate="no">
+    <div class="container" onclick="onclick">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <form class="center" method="POST">
+            <h2>Please Sign In</h2>
+            <input type="text" placeholder="username" name="username">
+            <input type="password" placeholder="password" name="password">
+            <button
+                style="padding: 10px;color: white;background-color: #5976c5;font-family: inherit;cursor: pointer;">Login
+                Now</button>
+            <h2>&nbsp;</h2>
+        </form>
+    </div>
+
+
     {% include 'footer.html' %}
+
+
 </body>
+
 </html>
