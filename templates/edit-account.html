@@ -26,65 +26,28 @@
                             <div class="col-md-6 form-group">
                                 <label for="account_name">Account Name</label>
                                 <input type="text" class="form-control" id="account_name" name="account_name"
-                                    placeholder="Enter Here" required>
+                                    placeholder="Enter Here" value="{{ account.acc_name }}" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="opening">Opening Balance</label>
                                 <input type="text" class="form-control" id="opening" name="opening"
-                                    placeholder="Enter Here" required>
+                                    placeholder="Enter Here" value="{{ account.opening_balance }}" required>
                             </div>
-
+                    
                             <div class="col-md-6 form-group">
                                 <label for="desc">Description</label>
-                                <textarea name="desc" id="desc" cols="30" rows="3" class="form-control"></textarea>
+                                <textarea name="desc" id="desc" cols="30" rows="3" class="form-control">{{ account.description }}</textarea>
                             </div>
                             <br><br>
                             <div class="col-md-12 mt-12 form-group mt-3">
-                                <input type="submit" name="submit" value="Add" class="btn btn-primary">
+                                <input type="submit" name="submit" value="Update" class="btn btn-primary">
                             </div>
-
-
                         </div>
-                    </form>
-
-
-
+                    </form>                    
 
                 </div>
             </div>
-            <br>
-            <div class="card">
-                <div class="card-header">
-                    Accounts List
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width: 10%;">Sr.</th>
-                                <th style="width: 40%;">Account Name</th>
-                                <th style="width: 15%;">Opening Balance</th>
-                                <th style="width: 15%;">Current Balance</th>
-                                <th style="width: 20%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for account in accounts %}
-                            <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ account.acc_name }}</td>
-                                <td>{{ account.opening_balance }}</td>
-                                <td>0</td> <!-- Display the current balance as 0 -->
-                                <td>
-                                    <!-- Add action buttons here -->
-                                    <a href="{{ url_for('delete_account', account_id=account.id) }}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
             <!-- </div> -->
 
         </div>

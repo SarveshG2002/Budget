@@ -61,14 +61,37 @@ def edit_account(account_id):
         return redirect(url_for('accounts'))
     
     if request.method == 'POST':
-        # Update account details based on form submission
-        account.acc_name = request.form.get('account_name')
-        account.opening_balance = request.form.get('opening')
-        account.description = request.form.get('desc')
-        db.session.commit()
-        # flash('Account updated successfully', 'success')
-        session['success'] = 'Account updated successfully'
-        return redirect(url_for('accounts'))
+        # Get form data
+        account_name = request.form.get('account_name')
+        opening_balance = request.form.get('opening')
+        description = request.form.get('desc')
+
+        try:
+            # Check if account name is empty
+            if not account_name:
+                session['error'] = 'Account not found'
+                return redirect(url_for('edit_account', account_id=account.id))
+
+            # Update account details based on form submission
+            account.acc_name = account_name
+            account.opening_balance = opening_balance
+            account.description = description
+            db.session.commit()
+
+            # Flash message for successful update
+            # flash('Account updated successfully', 'success')
+            session['success'] = 'Account updated successfully'
+            return redirect(url_for('accounts'))
+
+        except Exception as e:
+            # Rollback changes if an error occurs
+            db.session.rollback()
+
+            # Flash error message
+            session['error'] = "Can't update Account"
+
+            # Redirect back to the edit account page
+            return redirect(url_for('edit_account', account_id=account.id))
     
     # Render the edit account page with the account data
     return render_template('edit-account.html', account=account)
