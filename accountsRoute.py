@@ -35,3 +35,40 @@ def accounts():
         # Render the accounts page
         # print(accounts)
         return render_template('accounts.html', accounts=accounts)
+    
+
+@app.route('/delete_account/<int:account_id>', methods=['GET'])
+@login_required
+def delete_account(account_id):
+    # Retrieve the account from the database
+    account = Account.query.get(account_id)
+    if account:
+        # Delete the account
+        db.session.delete(account)
+        db.session.commit()
+        session['success'] = 'Account deleted successfully'
+    else:
+        session['error'] = 'Account not found'
+    return redirect(url_for('accounts'))
+
+
+@app.route('/edit_account/<int:account_id>', methods=['GET', 'POST'])
+@login_required
+def edit_account(account_id):
+    account = Account.query.get(account_id)
+    if not account:
+        session['error'] = 'Account not found'
+        return redirect(url_for('accounts'))
+    
+    if request.method == 'POST':
+        # Update account details based on form submission
+        account.acc_name = request.form.get('account_name')
+        account.opening_balance = request.form.get('opening')
+        account.description = request.form.get('desc')
+        db.session.commit()
+        # flash('Account updated successfully', 'success')
+        session['success'] = 'Account updated successfully'
+        return redirect(url_for('accounts'))
+    
+    # Render the edit account page with the account data
+    return render_template('edit-account.html', account=account)
