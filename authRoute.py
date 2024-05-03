@@ -49,3 +49,10 @@ def logout():
     session.clear()
     # Redirect to the login page
     return redirect(url_for('login'))
+
+@app.route('/')
+def index():
+    # Clear user session
+    # session.clear()
+    # Redirect to the login page
+    return redirect(url_for('login'))
