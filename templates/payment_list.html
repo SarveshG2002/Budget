@@ -22,20 +22,20 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">Sr.</th>
-                                <th style="width: 10%;">Payment Date</th>
-                                <th style="width: 10%">Account Type</th>
+                                <th style="width: 15%;">Payment Date</th>
+                                <th style="width: 15%">Account Type</th>
                                 <th style="width: 10%">Category</th>
                                 <th style="width: 15%">Amount</th>
                                 <th style="width: 20%">To</th>
-                                <th style="width: 10%">Action</th>
+                                <th style="width: 20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                           {{ for payment in payments}}
-                           <tr>
-                            <td>
-                                {{ loop.index }}
-                            </td>
+                            {% for payment in payments %}
+                            <tr>
+                                <td>
+                                    {{ loop.index }}
+                                </td>
                                 <td>
                                     {{ payment.date }}
                                 </td>
@@ -45,17 +45,17 @@
                                 <td>
                                     {{ payment.category }}
                                 </td>
-
                                 <td>
                                     {{ payment.amount }}
                                 </td>
                                 <td>
-                                    {{ amount.to }}
+                                    {{ payment.to }}
                                 </td>
                                 <td></td>
-                           </tr>
-                           {{ endfor }}
+                            </tr>
+                            {% endfor %}
                         </tbody>
+                        
                     </table>
                 </div>
             </div>
