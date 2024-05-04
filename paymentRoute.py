@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for, session
 from flask_app import app
-from models import Users
+from models import Account
+from models import Category
 from decorators import login_required  # Import the login_required decorator
 
 
@@ -11,5 +12,7 @@ def new_payment():
         return redirect(url_for('login'))
     else:
         # Render the login page
-        return render_template('new_payment.html')
+        accounts = Account.query.all()
+        categories = Category.query.all()
+        return render_template('new_payment.html',accounts=accounts,categories=categories)
 

@@ -9,7 +9,7 @@
     console.log(errorMessage);
 
     // Display the error message as a toast using toastr.js
-    $(document).ready(function() {
+    $(document).ready(function () {
         toastr.error(errorMessage);
     });
 </script>
@@ -24,9 +24,24 @@
     console.log(successMessage);
 
     // Display the success message as a toast using toastr.js
-    $(document).ready(function() {
+    $(document).ready(function () {
         toastr.success(successMessage);
     });
 </script>
 {% endif %}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElements = document.querySelectorAll('.slim-select');
+        selectElements.forEach(function (selectElement) {
+            new SlimSelect({
+                select: selectElement
+            });
+        });
+    });
+
+
+    $('input[type=date], input[type=time]').on('focus', function () {
+        this.showPicker();
+    });
+</script>
