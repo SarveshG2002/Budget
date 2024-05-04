@@ -10,11 +10,46 @@
         {% include 'sidebar.html' %}    
 
         <div class="main">
-            <h1>Welcome to the New Payment, {{ username }}!</h1>
-            
-            <ul>
-                
-            </ul>
+            <div class="card">
+                <div class="card-header">
+                    Add Account
+                </div>
+                <div class="card-body">
+
+
+
+
+                    <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12 row">
+                            <div class="col-md-6 form-group">
+                                <label for="account_name">Account Name</label>
+                                <input type="text" class="form-control" id="account_name" name="account_name"
+                                    placeholder="Enter Here" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="opening">Opening Balance</label>
+                                <input type="text" class="form-control" id="opening" name="opening"
+                                    placeholder="Enter Here" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="desc">Description</label>
+                                <textarea name="desc" id="desc" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <br><br>
+                            <div class="col-md-12 mt-12 form-group mt-3">
+                                <input type="submit" name="submit" value="Add" class="btn btn-primary">
+                            </div>
+
+
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+            </div>
         
         </div>
     </div>

@@ -24,3 +24,13 @@ class Category(db.Model):
 
     def __repr__(self):
         return f"<Category id={self.id}, name={self.name}>"
+
+
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.String(255))
+    note = db.Column(db.String(255))
+    to = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    date = db.Column(db.Date, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
