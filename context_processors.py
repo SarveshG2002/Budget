@@ -20,7 +20,7 @@ def sidebar():
         },
         {
             'name': 'Payment List',
-            'link': 'new_payment',
+            'link': 'payment_list',
             'page': 'payment_list',
             'icon': 'shopping_bag',
             'indicator': request.endpoint

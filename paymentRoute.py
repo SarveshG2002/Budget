@@ -36,3 +36,11 @@ def new_payment():
         accounts = Account.query.all()
         categories = Category.query.all()
         return render_template('new_payment.html', accounts=accounts, categories=categories)
+    
+
+@app.route('/payment_list', methods=['GET'])
+@login_required
+def payment_list():
+    payments = Payment.query.all()
+    # payment_data = [{'id': payment.id, 'amount': payment.amount, 'note': payment.note} for payment in payments]
+    return render_template('payment_list.html', payments=payments)
