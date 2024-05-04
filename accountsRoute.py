@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, session
 from flask_app import app, db
 from models import Account
 from decorators import login_required
+from datetime import datetime
 
 @app.route('/accounts', methods=['GET', 'POST'])
 @login_required
@@ -18,8 +19,10 @@ def accounts():
             return redirect(url_for('accounts'))
 
         try:
+            current_datetime = datetime.now()
+            formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
             # Create a new Account object and add it to the database session
-            new_account = Account(acc_name=account_name, opening_balance=opening_balance, description=description, created_at="hello")
+            new_account = Account(acc_name=account_name, opening_balance=opening_balance, description=description, created_at=formatted_datetime)
             db.session.add(new_account)
             db.session.commit()
             session['success'] = "Account created successfully"

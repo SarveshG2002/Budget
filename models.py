@@ -32,5 +32,6 @@ class Payment(db.Model):
     note = db.Column(db.String(255))
     to = db.Column(db.String(255))
     category = db.Column(db.String(255))
+    account = db.Column(db.String(255))
     date = db.Column(db.Date, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
