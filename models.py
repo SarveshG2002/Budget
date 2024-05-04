@@ -17,3 +17,10 @@ class Account(db.Model):
 
     def __repr__(self):
         return f"<Account id={self.id}, acc_name={self.acc_name}>"
+    
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+
+    def __repr__(self):
+        return f"<Category id={self.id}, name={self.name}>"
