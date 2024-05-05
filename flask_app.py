@@ -20,6 +20,7 @@ from authRoute import *
 from paymentRoute import *
 from accountsRoute import *
 from categoryRoute import *
+from incomeRoute import *
 
 if __name__ == '__main__':
     app.run()

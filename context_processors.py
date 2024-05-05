@@ -34,7 +34,7 @@ def sidebar():
         },
         {
             'name':'Income',
-            'link':'new_payment',
+            'link':'income',
             'page':'income',
             'icon': 'dashboard',
             'indicator': request.endpoint
