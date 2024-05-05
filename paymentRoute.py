@@ -36,21 +36,39 @@ def new_payment():
         accounts = Account.query.all()
         categories = Category.query.all()
         return render_template('new_payment.html', accounts=accounts, categories=categories)
-    
+
 
 @app.route('/payment_list', methods=['GET'])
 @login_required
 def payment_list():
-    # Execute the query to fetch payments along with their associated account and category names
+    # Get filter values from request arguments
+    from_date = request.args.get('from_date')
+    to_date = request.args.get('to_date')
+    account_id = request.args.get('account')
+    category_id = request.args.get('category')
+
+    # Build the base query
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                     .outerjoin(Account, Payment.account == Account.id) \
                     .outerjoin(Category, Payment.category == Category.id)
+
+    # Apply filters
+    if from_date and to_date:
+        query = query.filter(Payment.date.between(from_date, to_date))
+    if account_id:
+        query = query.filter(Payment.account == account_id)
+    if category_id:
+        query = query.filter(Payment.category == category_id)
+
+    # Execute the query
     payments = query.all()
+    accounts = Account.query.all()
+    categories = Category.query.all()
 
     # Print the last executed query
-    print(payments)
-    print(query.statement)
-    return render_template('payment_list.html', payments=payments)
+    # print(query.statement)
+
+    return render_template('payment_list.html', payments=payments,accounts=accounts,categories=categories)
 
 
 @app.route('/delete_payment/<int:payment_id>', methods=['GET'])
