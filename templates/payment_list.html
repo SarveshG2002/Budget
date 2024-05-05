@@ -31,29 +31,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for payment in payments %}
-                            <tr>
-                                <td>
-                                    {{ loop.index }}
-                                </td>
-                                <td>
-                                    {{ payment.date }}
-                                </td>
-                                <td>
-                                    {{ payment.account }}
-                                </td>
-                                <td>
-                                    {{ payment.category }}
-                                </td>
-                                <td>
-                                    {{ payment.amount }}
-                                </td>
-                                <td>
-                                    {{ payment.to }}
-                                </td>
-                                <td></td>
-                            </tr>
-                            {% endfor %}
+                            <tbody>
+                                {% for payment in payments %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ payment.Payment.date }}</td>
+                                    <td>{{ payment.acc_name }}</td>
+                                    <td>{{ payment.category_name }}</td>
+                                    <td>{{ payment.Payment.amount }}</td>
+                                    <td>{{ payment.Payment.to }}</td>
+                                    <td>
+                                        <a href="{{ url_for('delete_payment', payment_id=payment.id) }}"
+                                            class="btn btn-danger">Delete</a>
+                                        <a href="{{ url_for('delete_payment', payment_id=payment.id) }}"
+                                            class="btn btn-primary">Edit</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
                         </tbody>
                         
                     </table>

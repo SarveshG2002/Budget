@@ -39,8 +39,16 @@ def new_payment():
     
 
 @app.route('/payment_list', methods=['GET'])
+@app.route('/payment_list', methods=['GET'])
 @login_required
 def payment_list():
-    payments = Payment.query.all()
-    # payment_data = [{'id': payment.id, 'amount': payment.amount, 'note': payment.note} for payment in payments]
+    # Execute the query to fetch payments along with their associated account and category names
+    query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
+                    .outerjoin(Account, Payment.account == Account.id) \
+                    .outerjoin(Category, Payment.category == Category.id)
+    payments = query.all()
+
+    # Print the last executed query
+    print(payments)
+    print(query.statement)
     return render_template('payment_list.html', payments=payments)
