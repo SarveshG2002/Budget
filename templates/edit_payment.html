@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body>
+
+    {% include 'header-layout.html' %}
+
+
+    <div class="side_main">
+        {% include 'sidebar.html' %}
+
+        <div class="main">
+            <div class="card">
+                <div class="card-header">
+                    Add Account
+                </div>
+                <div class="card-body">
+
+
+
+
+                    <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12 row">
+                            <div class="col-md-6 form-group">
+                                <label for="pdate">Payment Date</label>
+                                <input type="date" class="form-control" id="pdate" name="pdate"
+                                    value="{{payment.date}}" placeholder="Enter Here" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="account">Account Name</label>
+                                <select name="account" id="account" class="form-control slim-select" required>
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                    {% if account.id == payment.account %}
+                                    <option value="{{account.id}}" selected>{{account.acc_name}}</option>
+                                    {% else %}
+                                    <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="amount">Amount</label>
+                                <input type="text" class="form-control" id="amount" value="{{payment.amount}}"
+                                    name="amount" placeholder="Enter Here" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="category">Category</label>
+                                <select name="category" id="category" class="form-control slim-select" required>
+                                    <option value="">Select Category</option>
+                                    {% for category in categories %}
+                                    {% if category.id == payment.category %}
+                                    <option value="{{ category.id }}" selected>{{ category.name }}</option>
+                                    {% else %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+
+                            <div class="col-md-6 form-group">
+                                <label for="to">To</label>
+                                <input type="text" class="form-control" id="to" name="to" value="{{payment.to}}"
+                                    placeholder="Enter Here" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="note">Note</label>
+                                <textarea name="note" id="note" cols="30" rows="3"
+                                    class="form-control">{{payment.note}}</textarea>
+                            </div>
+                            <br><br>
+                            <div class="col-md-12 mt-12 form-group mt-3">
+                                <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                            </div>
+
+
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+
+</html>
