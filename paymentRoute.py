@@ -52,3 +52,16 @@ def payment_list():
     print(payments)
     print(query.statement)
     return render_template('payment_list.html', payments=payments)
+
+
+@app.route('/delete_payment/<int:payment_id>', methods=['GET'])
+@login_required
+def delete_payment(payment_id):
+    payment = Payment.query.get(payment_id)
+    if payment:
+        db.session.delete(payment)
+        db.session.commit()
+        session['success'] = 'Payment deleted successfully'
+    else:
+        session['error'] = 'Payment not found'
+    return redirect(url_for('payment_list'))
