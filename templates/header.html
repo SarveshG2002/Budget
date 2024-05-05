@@ -1,4 +1,3 @@
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +9,12 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet">
+    </link>
     <style>
         body {
             padding: 0px;
@@ -22,29 +23,32 @@
 
         .side_main {
             display: grid;
-            grid-template-columns: 10% 90%;
+            grid-template-columns: 200px auto;
         }
-        .side_main .main{
+
+        .side_main .main {
             padding: 20px;
         }
 
-        .sidebar{
+        .sidebar {
             width: 100%;
             height: 94vh;
             background-color: #ffffff
         }
 
-        .side_main .sidebardiv{
+        .side_main .sidebardiv {
             width: 100%;
             height: 100%;
             background-color: #f8f9fa
         }
-        .sidebardiv .navigations{
+
+        .sidebardiv .navigations {
             width: 100%;
             /* padding: 10px 0px 10px 0px */
             height: 50px;
         }
-        .sidebardiv .navigations .navigation{
+
+        .sidebardiv .navigations .navigation {
             /* background-color: red; */
             width: 100%;
             display: grid;
@@ -53,27 +57,38 @@
             /* padding:  */
             margin-top: 10px;
         }
-        .sidebardiv .navigations .navigation .indicator{
+
+        .sidebardiv .navigations .navigation .indicator {
             background-color: #673ab7;
             width: 100%;
             height: 50px;
             border-radius: 0px 10px 10px 0px;
         }
-        .sidebardiv .navigations .navigation .inditext{
+
+        .sidebardiv .navigations .navigation .inditext {
             /* background-color: #eeeeee; */
             width: 100%;
             height: 50px;
             font-family: 'Croissant One', cursive;
             position: relative;
             display: flex;
-            align-items: center; /* Center vertically */
+            align-items: center;
+            /* Center vertically */
             /* justify-content: center; Center horizontally */
             /* height: 100px;  */
             /* background-color: #ccc; */
             padding: 0px 0px 0px 20px;
         }
+
         .sidebardiv .navigations .navigation:hover {
             cursor: pointer;
+        }
+
+        @media (max-width: 1200px) {
+            .side_main {
+                /* display: grid; */
+                /* grid-template-columns: 200px auto; */
+            }
         }
 
         /* Header CSS */

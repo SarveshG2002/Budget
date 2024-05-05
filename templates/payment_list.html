@@ -18,6 +18,54 @@
                     Categories
                 </div>
                 <div class="card-body">
+                    <form action="" class="col-md-12 row" method="get" enctype="">
+                        <div class="col-md-12 row">
+                            <div class="col-md-3 form-group">
+                                <label for="pdate">From Date</label>
+                                <input type="date" class="form-control" id="pdate" name="pdate"
+                                    placeholder="Enter Here" required>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="pdate">To Date</label>
+                                <input type="date" class="form-control" id="pdate" name="pdate"
+                                    placeholder="Enter Here" required>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="account">Account Name</label>
+                                <select name="account" id="account" class="form-control slim-select" required>
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                        <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label for="category">Category</label>
+                                <select name="category" id="category" class="form-control slim-select" required>
+                                    <option value="">Select Category</option>
+                                    {% for category in categories %}
+                                        <option value="{{category.id}}">{{category.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            
+                            
+
+                            
+                            <br><br>
+                            <div class="col-md-12 mt-12 form-group mt-3">
+                                <input type="submit" name="submit" value="Add" class="btn btn-primary">
+                            </div>
+
+
+                        </div>
+                    </form>
+
+                </div>
+                <br>
+                <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
@@ -31,27 +79,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tbody>
-                                {% for payment in payments %}
+                            {% set payment_amounts = [] %}
+                            {% for payment in payments %}
+                                {% set payment_amount = payment.Payment.amount | int %}
+                                {% set _ = payment_amounts.append(payment_amount) %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
                                     <td>{{ payment.Payment.date }}</td>
                                     <td>{{ payment.acc_name }}</td>
                                     <td>{{ payment.category_name }}</td>
-                                    <td>{{ payment.Payment.amount }}</td>
+                                    <td>{{ payment_amount }}</td>
                                     <td>{{ payment.Payment.to }}</td>
                                     <td>
-                                        <a href="{{ url_for('delete_payment', payment_id=payment.Payment.id) }}"
-                                            class="btn btn-danger">Delete</a>
-                                        <a href="{{ url_for('edit_payment', payment_id=payment.Payment.id) }}"
-                                            class="btn btn-primary">Edit</a>
+                                        <a href="{{ url_for('delete_payment', payment_id=payment.Payment.id) }}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ url_for('edit_payment', payment_id=payment.Payment.id) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                 </tr>
-                                {% endfor %}
-                            </tbody>
+                            {% endfor %}
+                            
                         </tbody>
                         
+                        
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                                <th>Total</th>
+                                <th>{{ payment_amounts | sum }}</th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
+                    
                 </div>
             </div>
             <!-- </div> -->
