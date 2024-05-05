@@ -23,7 +23,7 @@ def new_payment():
         formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
         # Create a new Payment object and add it to the database session
-        new_payment = Payment(date=pdate, account=account_id, amount=amount, category=category_id, to=to, note=note,created_at=formatted_datetime)
+        new_payment = Payment(user_id=session['user_id'],date=pdate, account=account_id, amount=amount, category=category_id, to=to, note=note,created_at=formatted_datetime)
         db.session.add(new_payment)
         db.session.commit()
 
@@ -33,8 +33,8 @@ def new_payment():
 
     else:
         # Render the form with account and category options
-        accounts = Account.query.all()
-        categories = Category.query.all()
+        accounts = Account.query.filter_by(user_id=session['user_id']).all()
+        categories = Category.query.filter_by(user_id=session['user_id']).all()
         return render_template('new_payment.html', accounts=accounts, categories=categories)
 
 
@@ -50,7 +50,7 @@ def payment_list():
     # Build the base query
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                     .outerjoin(Account, Payment.account == Account.id) \
-                    .outerjoin(Category, Payment.category == Category.id)
+                    .outerjoin(Category, Payment.category == Category.id).filter_by(user_id=session['user_id'])
 
     # Apply filters
     if from_date and to_date:

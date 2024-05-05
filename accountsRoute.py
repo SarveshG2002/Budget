@@ -22,7 +22,7 @@ def accounts():
             current_datetime = datetime.now()
             formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
             # Create a new Account object and add it to the database session
-            new_account = Account(acc_name=account_name, opening_balance=opening_balance, description=description, created_at=formatted_datetime)
+            new_account = Account(user_id=session['user_id'],acc_name=account_name, opening_balance=opening_balance, description=description, created_at=formatted_datetime)
             db.session.add(new_account)
             db.session.commit()
             session['success'] = "Account created successfully"
@@ -34,7 +34,7 @@ def accounts():
             return redirect(url_for('accounts'))
 
     else:
-        accounts = Account.query.all()
+        accounts = Account.query.filter_by(user_id=session['user_id']).all()
         # Render the accounts page
         # print(accounts)
         return render_template('accounts.html', accounts=accounts)

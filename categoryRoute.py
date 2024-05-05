@@ -15,7 +15,7 @@ def category():
             return redirect(url_for('category'))
 
         # Create a new category object and add it to the database session
-        new_category = Category(name=category_name)
+        new_category = Category(name=category_name,user_id=session['user_id'])
         db.session.add(new_category)
         db.session.commit()
 
@@ -26,7 +26,7 @@ def category():
         # Redirect to the category page to display the updated list of categories
         return redirect(url_for('category'))
     else:
-        categories = Category.query.all()
+        categories = Category.query.filter_by(user_id=session['user_id']).all()
         # Render the category page
         return render_template('category.html',categories=categories)
     
