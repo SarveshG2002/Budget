@@ -64,8 +64,8 @@ def payment_list():
 
     # Execute the query
     payments = query.all()
-    accounts = Account.query.all()
-    categories = Category.query.all()
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    categories = Category.query.filter_by(user_id=session['user_id']).all()
 
     # Print the last executed query
     # print(query.statement)
@@ -138,31 +138,32 @@ def edit_payment(payment_id):
 @login_required
 def income():
     if request.method == 'POST':
-        # pdate = request.form.get('pdate')
+        date = request.form.get('date')
         # account_id = request.form.get('account')
-        # amount = request.form.get('amount')
+        amount = request.form.get('amount')
         # category_id = request.form.get('category')
         # to = request.form.get('to')
-        # note = request.form.get('note')
+        note = request.form.get('note')
 
-        # if not all([pdate, account_id, amount, category_id]):
-        #     session['error'] = "Please fill in all required fields"
-        #     return redirect(url_for('new_payment'))
+        if not all([date,amount]):
+            session['error'] = "Please fill in all required fields"
+            return redirect(url_for('income'))
         
-        # current_datetime = datetime.now()
-        # formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
         # # Create a new Payment object and add it to the database session
-        # new_payment = Payment(date=pdate, account=account_id, amount=amount, category=category_id, to=to, note=note,created_at=formatted_datetime)
+        # new_payment = Payment(date=date, account=account_id, amount=amount, note=note,created_at=formatted_datetime)
         # db.session.add(new_payment)
         # db.session.commit()
 
         # # Redirect to a success page or wherever needed
-        # session['success'] = "Payment Added Successfully"
+        session['success'] = "Income Added Successfully"
         return redirect(url_for('income'))
 
     else:
         # Render the form with account and category options
         # accounts = Account.query.all()
         # categories = Category.query.all()
-        return render_template('income.html')
+        accounts = Account.query.filter_by(user_id=session['user_id']).all()
+        return render_template('income.html',accounts=accounts)
