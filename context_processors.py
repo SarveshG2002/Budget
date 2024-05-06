@@ -12,31 +12,38 @@ def sidebar():
             'indicator': request.endpoint
         },
         {
+            'name': 'Cashbook',
+            'link': 'cashbook',
+            'page': 'cashbook',
+            'icon': 'calculate',
+            'indicator': request.endpoint
+        },
+        {
             'name': 'New Payment',
             'link': 'new_payment',
             'page': 'new_payment',
-            'icon': 'shopping_bag',
+            'icon': 'payments',
             'indicator': request.endpoint
         },
         {
             'name': 'Payment List',
             'link': 'payment_list',
             'page': 'payment_list',
-            'icon': 'shopping_bag',
+            'icon': 'receipt',
             'indicator': request.endpoint
         },
         {
             'name': 'Category',
             'link': 'category',
             'page': 'category',
-            'icon': 'shopping_bag',
+            'icon': 'category',
             'indicator': request.endpoint
         },
         {
             'name':'Income',
             'link':'income',
             'page':'income',
-            'icon': 'dashboard',
+            'icon': 'move_to_inbox',
             'indicator': request.endpoint
         },
         {

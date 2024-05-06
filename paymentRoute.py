@@ -187,3 +187,9 @@ def income():
         # categories = Category.query.all()
         accounts = Account.query.filter_by(user_id=session['user_id']).all()
         return render_template('income.html',accounts=accounts,incomes=incomes)
+    
+
+@app.route('/cashbook', methods=['GET', 'POST'])
+@login_required
+def cashbook():
+    return render_template('cashbook.html')
