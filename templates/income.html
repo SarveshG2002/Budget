@@ -25,7 +25,7 @@
                         <div class="col-md-12 row">
                             <div class="col-md-6 form-group">
                                 <label for="date">Date</label>
-                                <input type="text" class="form-control" id="date" name="date"
+                                <input type="date" class="form-control" id="date" name="date"
                                 placeholder="Enter Here">
                             </div>
                             <div class="col-md-6 form-group">
@@ -42,9 +42,7 @@
                                 <input type="text" class="form-control" id="amount" name="amount"
                                 placeholder="Enter Here">
                             </div>
-                            <div class="col-md-6 form-group">
-                                
-                            </div>
+                            
                             <div class="col-md-6 form-group">
                                 <label for="note">Note</label>
                                 <textarea name="note" id="note" class="form-control"></textarea>
@@ -64,6 +62,42 @@
 
 
 
+                </div>
+                
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" class="col-md-12 row" method="get" enctype="">
+                        <div class="col-md-12 row">
+                            <div class="col-md-2 form-group">
+                                <label for="from_date">From Date</label>
+                                <input type="date" class="form-control" id="from_date" name="from_date"
+                                    placeholder="Enter Here">
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="to_date">To Date</label>
+                                <input type="date" class="form-control" id="to_date" name="to_date"
+                                    placeholder="Enter Here">
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="account">Account Name</label>
+                                <select name="account" id="account" class="form-control slim-select">
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                        <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            
+
+                            <br><br>
+                            <div class="col-md-2 mt-2 form-group mt-3">
+                                <input type="submit" name="submit" value="Add" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             

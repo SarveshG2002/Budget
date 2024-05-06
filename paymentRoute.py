@@ -139,7 +139,7 @@ def edit_payment(payment_id):
 def income():
     if request.method == 'POST':
         date = request.form.get('date')
-        # account_id = request.form.get('account')
+        account_id = request.form.get('account')
         amount = request.form.get('amount')
         # category_id = request.form.get('category')
         # to = request.form.get('to')
@@ -153,17 +153,37 @@ def income():
         formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
         # # Create a new Payment object and add it to the database session
-        # new_payment = Payment(date=date, account=account_id, amount=amount, note=note,created_at=formatted_datetime)
-        # db.session.add(new_payment)
-        # db.session.commit()
+        new_payment = Payment(user_id=session['user_id'],date=date,transaction_type="income", account=account_id, amount=amount, note=note,created_at=formatted_datetime)
+        db.session.add(new_payment)
+        db.session.commit()
 
         # # Redirect to a success page or wherever needed
         session['success'] = "Income Added Successfully"
         return redirect(url_for('income'))
 
     else:
+
+        from_date = request.args.get('from_date')
+        to_date = request.args.get('to_date')
+        account_id = request.args.get('account')
+
+        query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
+                    .outerjoin(Account, Payment.account == Account.id) \
+                    
+    
+        query = query.filter(Payment.user_id==session['user_id'])
+        query = query.filter(Payment.transaction_type=="income")
+        # Apply filters
+        if from_date and to_date:
+            query = query.filter(Payment.date.between(from_date, to_date))
+        if account_id:
+            query = query.filter(Payment.account == account_id)
+
+        # Execute the query
+        incomes = query.all()
+
         # Render the form with account and category options
         # accounts = Account.query.all()
         # categories = Category.query.all()
         accounts = Account.query.filter_by(user_id=session['user_id']).all()
-        return render_template('income.html',accounts=accounts)
+        return render_template('income.html',accounts=accounts,incomes=incomes)
