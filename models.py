@@ -31,6 +31,7 @@ class Category(db.Model):
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String(255))
+    transaction_type = db.Column(db.String(255))
     amount = db.Column(db.String(255))
     note = db.Column(db.String(255))
     to = db.Column(db.String(255))
