@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class=" -webkit-">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+
+
+
+    <title>Budget</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <style>
         *,
         *::before,
@@ -302,32 +313,38 @@
             transform: translateX(30%);
         }
     </style>
+
+
+
 </head>
 
 <body>
+
+
+
     <section class="forms-section">
         <h1 class="section-title">Animated Forms</h1>
         <div class="forms">
-            <div class="form-wrapper is-active">
+            <form class="form-wrapper is-active" method="POST">
                 <button type="button" class="switcher switcher-login">
                     Login
                     <span class="underline"></span>
                 </button>
-                <form class="form form-login">
+                <div class="form form-login">
                     <fieldset>
-                        <legend>Please, enter your email and password for login.</legend>
+                        <legend>Please, enter your username and password for login.</legend>
                         <div class="input-block">
-                            <label for="login-email">E-mail</label>
-                            <input id="login-email" type="email" required>
+                            <label for="login-email">Username</label>
+                            <input id="login-email" type="text" name="username" required>
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
-                            <input id="login-password" type="password" required>
+                            <input id="login-password" type="password" name="password" required>
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
-                </form>
-            </div>
+                </div>
+            </form>
             <div class="form-wrapper">
                 <button type="button" class="switcher switcher-signup">
                     Sign Up
@@ -354,7 +371,13 @@
             </div>
         </div>
     </section>
+
+
+
+
+
 </body>
+
 <script>
     const switchers = [...document.querySelectorAll('.switcher')]
 
