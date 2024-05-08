@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet">
     </link>
     <style>
@@ -104,7 +106,9 @@
             cursor: pointer;
         }
 
-        
+
+
+
 
         /* Header CSS */
     </style>
@@ -145,6 +149,19 @@
             align-self: end;
             /* Align second child to the bottom of the statistic */
         }
+
+        .graph-statistics {
+            display: grid;
+            grid-template-columns: 70% auto;
+            column-gap: 10px;
+        }
+
+        .graph-statistics .statistic {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
         @media (max-width: 1200px) {
             .statistics {
                 grid-template-columns: auto auto;
@@ -152,7 +169,16 @@
                 /* display: grid; */
                 /* grid-template-columns: 200px auto; */
             }
+
+            .graph-statistics {
+                display: grid;
+                grid-template-columns: 100%;
+                column-gap: 10px;
+                row-gap: 10px;
+            }
+
         }
+
         @media (max-width: 600px) {
             .statistics {
                 grid-template-columns: auto;
@@ -223,7 +249,7 @@
                 <div class="statistic">
                     <div class="child">
                         <span class="material-symbols-outlined">
-                            calendar_today
+                            calendar_clock
                         </span>
                     </div>
                     <div class="child">
@@ -253,7 +279,7 @@
                 <div class="statistic">
                     <div class="child">
                         <span class="material-symbols-outlined">
-                            calendar_today
+                            calendar_clock
                         </span>
                     </div>
                     <div class="child">
@@ -268,7 +294,7 @@
                 <div class="statistic">
                     <div class="child">
                         <span class="material-symbols-outlined">
-                            calendar_today
+                            calendar_month
                         </span>
                     </div>
                     <div class="child">
@@ -277,6 +303,35 @@
                         </div>
                         <div style="font-size: 30px;font-weight: bold;">
                             $15000
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+
+            <div class="graph-statistics">
+                <div class="statistic">
+                    <canvas id="myChart" style="width:100%;height: 400px;"></canvas>
+                </div>
+
+                <div class="statistic">
+                    <div style="font-size: 20px;font-weight: bold;">
+                        Top Expense Category
+                        <br>
+                        
+                        <div style="color: grey;margin-top: 10px;">
+                            <span>Food</span>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                              </div>
+                        </div>
+                        <div style="color: grey;margin-top: 10px;">
+                            <span>Clothes</span>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -305,6 +360,27 @@
 
         $('input[type=date], input[type=time]').on('focus', function () {
             this.showPicker();
+        });
+
+        const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                    borderColor: "red",
+                    fill: false
+                }, {
+                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                    borderColor: "green",
+                    fill: false
+                }]
+            },
+            options: {
+                legend: { display: false }
+            }
         });
     </script>
 </body>
