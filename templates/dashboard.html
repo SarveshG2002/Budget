@@ -1,24 +1,136 @@
 <!DOCTYPE html>
 <html>
-    {% include 'header.html' %}
+{% include 'header.html' %}
+
 <body>
-    
+    <style>
+        .statistics {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            column-gap: 10px;
+            width: 100%;
+        }
+
+        .statistics .statistic {
+            display: grid;
+            /* Use grid layout for each statistic */
+            grid-template-rows: auto 1fr;
+            /* Set first row to auto and second row to fill remaining space */
+            height: 150px;
+            /* color: white; */
+            background-color: white;
+            border-radius: 20px;
+            padding: 10px;
+            /* font-weight: bold; */
+        }
+
+        .statistics .statistic:first-child {
+            color: white;
+            background-color: #673ab7;
+        }
+
+        .statistics .statistic .child {
+            padding: 10px;
+        }
+
+        .statistics .statistic .child:nth-child(2) {
+            align-self: end;
+            /* Align second child to the bottom of the statistic */
+        }
+        @media (max-width: 1200px) {
+            .statistics {
+                grid-template-columns: auto auto;
+                row-gap: 10px;
+                /* display: grid; */
+                /* grid-template-columns: 200px auto; */
+            }
+        }
+        @media (max-width: 600px) {
+            .statistics {
+                grid-template-columns: auto;
+                row-gap: 10px;
+                /* display: grid; */
+                /* grid-template-columns: 200px auto; */
+            }
+        }
+    </style>
+
     {% include 'header-layout.html' %}
-    
+
 
     <div class="side_main">
-        {% include 'sidebar.html' %}    
+        {% include 'sidebar.html' %}
 
         <div class="main">
             <h1>Welcome to the Dashboard, {{ username }}!</h1>
-            <ul>
-                
-            </ul>
-        
+            <div class="statistics">
+                <div class="statistic">
+                    <div class="child">
+                        <span class="material-symbols-outlined">
+                            calendar_today
+                        </span>
+                    </div>
+                    <div class="child">
+                        <div style="font-size: 20px;font-weight: bold;">
+                            Total Expense
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;">
+                            $15000
+                        </div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="child">
+                        <span class="material-symbols-outlined">
+                            calendar_today
+                        </span>
+                    </div>
+                    <div class="child">
+                        <div style="font-size: 20px;font-weight: bold;">
+                            Today Expense
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;">
+                            $15000
+                        </div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="child">
+                        <span class="material-symbols-outlined">
+                            calendar_today
+                        </span>
+                    </div>
+                    <div class="child">
+                        <div style="font-size: 20px;font-weight: bold;">
+                            Total Income
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;">
+                            $15000
+                        </div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="child">
+                        <span class="material-symbols-outlined">
+                            calendar_today
+                        </span>
+                    </div>
+                    <div class="child">
+                        <div style="font-size: 20px;font-weight: bold;">
+                            This Month Income
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;">
+                            $15000
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
 
     {% include 'footer.html' %}
 </body>
+
 </html>
