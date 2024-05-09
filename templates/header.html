@@ -36,13 +36,18 @@
         .sidebar {
             width: 100%;
             height: 94vh;
-            background-color: white
+            margin-top: 65px;
+            background-color: white;
+
         }
 
         .side_main .sidebardiv {
             width: 100%;
             height: 100%;
-            background-color: white
+            background-color: white;
+            /* position: fixed; */
+            top: 10;
+            
         }
 
         .sidebardiv .navigations {
@@ -83,7 +88,7 @@
             padding: 0px 0px 0px 20px;
         }
 
-        .username_div{
+        .username_div {
             /* width: 100%; */
             height: 50px;
             font-family: 'Croissant One', cursive;
@@ -98,14 +103,50 @@
 
         }
 
+
+        .mobilemenu {
+            display: none;
+        }
+
         .sidebardiv .navigations .navigation:hover {
             cursor: pointer;
         }
 
-        @media (max-width: 1200px) {
-            .side_main {
+        .navbar {
+            position: fixed;
+            /* Fix the navbar at the top */
+            top: 0;
+            /* Set distance from the top of the viewport */
+            width: 100%;
+            /* Occupy full width of the viewport */
+            z-index: 1;
+            /* Ensure the navbar stays on top of other content */
+            /* Add any additional styling as needed */
+        }
+
+
+        @media (max-width: 500px) {
+            .username_div {
                 /* display: grid; */
                 /* grid-template-columns: 200px auto; */
+                display: none;
+            }
+
+            .mobilemenu {
+                display: block;
+            }
+
+            .side_main {
+                grid-template-columns: 100%;
+
+            }
+
+            .sidebar {
+                /* display: none; */
+                position: fixed;
+                z-index: 1;
+                width: 250px;
+                margin-top: 55px;
             }
         }
 
