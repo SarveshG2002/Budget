@@ -60,7 +60,10 @@
     // Attach the event listener
     mainPanel.addEventListener("click", () => {
         if(screen.width<500){
-            showSidebar();
+            if(document.getElementById("sidebar").style.display=="block"){
+                showSidebar();
+            }
+            
         }
         
     });
