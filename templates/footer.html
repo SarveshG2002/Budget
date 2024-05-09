@@ -44,4 +44,14 @@
     $('input[type=date], input[type=time]').on('focus', function () {
         this.showPicker();
     });
+
+    function showSidebar(){
+        // console.log("showing sidebar")
+        if(document.getElementById("sidebar").style.display=="none"){
+            document.getElementById("sidebar").style.display="block";
+        }else{
+            document.getElementById("sidebar").style.display="none";
+        }
+        
+    }
 </script>
