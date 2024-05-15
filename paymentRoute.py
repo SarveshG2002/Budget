@@ -193,3 +193,10 @@ def income():
 @login_required
 def cashbook():
     return render_template('cashbook.html')
+
+
+
+@app.route('/transfer', methods=['GET', 'POST'])
+@login_required
+def transfer():
+    return render_template('transferToAnotherBank.html')

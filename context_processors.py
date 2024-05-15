@@ -52,6 +52,13 @@ def sidebar():
             'page':'accounts',
             'icon': 'account_balance',
             'indicator': request.endpoint
+        },
+        {
+            'name':'Transfer',
+            'link':'transfer',
+            'page':'transfer',
+            'icon': 'account_balance',
+            'indicator': request.endpoint
         }
 
         # Add more sidebar items as needed
