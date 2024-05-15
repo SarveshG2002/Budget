@@ -199,4 +199,5 @@ def cashbook():
 @app.route('/transfer', methods=['GET', 'POST'])
 @login_required
 def transfer():
-    return render_template('transferToAnotherBank.html')
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    return render_template('transferToAnotherBank.html',accounts=accounts)

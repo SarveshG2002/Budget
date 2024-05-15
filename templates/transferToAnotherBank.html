@@ -23,17 +23,47 @@
 
                     <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
                         <div class="col-md-12 row">
-                            <div class="col-md-6 form-group">
-                                <label for="category_name">Password</label>
-                                <input type="text" class="form-control" id="category_name" name="category_name"
+                            <div class="col-md-3 form-group">
+                                <label for="category_name">Date</label>
+                                <input type="date" class="form-control" id="category_name" name="category_name"
                                 placeholder="Enter Here">
                             </div>
-                            <div class="col-md-6 form-group">
+
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Amount</label>
+                                <input type="date" class="form-control" id="amount" name="amount"
+                                placeholder="Enter Here">
+                            </div>
+
+                            <div class="col-md-6 form-group mt-5">
                                 
                             </div>
+                            <br>
+
+                            <div class="col-md-3 form-group">
+                                <label for="from_account">Transfer From</label>
+                                <select name="from_account" id="account1" class="form-control slim-select">
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                        <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label for="to_account">Transfer To</label>
+                                <select name="to_account" id="account2" class="form-control slim-select">
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                        <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
                             
-                            <div class="col-md-6 mt-3 form-group">
-                                <input type="submit" name="submit" value="Add" class="btn btn-primary">
+                            
+                            <div class="col-md-12 mt-3 form-group">
+                                <input type="submit" name="submit" value="Transfer" class="btn btn-primary">
                             </div>
             
             
