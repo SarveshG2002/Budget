@@ -31,17 +31,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% set total_income = [] %}
+                            {% set total_expense = [] %}
                             {% set payment_amounts = [] %}
+                            {% set tota=[tot] %}
                             {% for payment in incomes %}
                                 {% set payment_amount = payment.Payment.amount | int %}
                                 {% set _ = payment_amounts.append(payment_amount) %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
                                     <td>{{ payment.Payment.date }}</td>
-                                    <td>{{ payment.Payment.transaction_type }}</td>
+                                    <td>{{ payment.Payment.transaction_type|capitalize }}</td>
                                     <td>
                                         {% if payment.Payment.transaction_type == "income" %}
                                             {{ payment_amount }}
+                                            {% set _ = total_income.append(payment_amount) %}
+                                            
                                         {% else %}
                                             0
                                         {% endif %}
@@ -49,23 +54,33 @@
                                     <td>
                                         {% if payment.Payment.transaction_type == "expense" %}
                                             {{ payment_amount }}
+                                            {% set _ = total_expense.append(payment_amount) %}
+                                            
                                         {% else %}
                                             0
                                         {% endif %}
                                     </td>
                                     <td>
-                                        0
+                                        {{ tota | sum }}
                                     </td>
+                                    {% if payment.Payment.transaction_type == "income" %}
+                                        
+                                        {% set _ = total_income.append(payment_amount) %}
+                                        {% set _ = tota.append(0-payment_amount) %}
+                                    {% else %}
+                                        {% set _ = tota.append(payment_amount) %}
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
                         
                         <tfoot>
                             <tr>
-                                <td colspan="4"></td>
+                                <td colspan="2"></td>
                                 <th>Total</th>
-                                <th>{{ payment_amounts | sum }}</th>
-                                <td></td>
+                                <th>{{ total_income | sum }}</th>
+                                <th>{{ total_expense | sum }}</th>
+                                <td>{{ tota | sum }}</td>
                                 
                             </tr>
                         </tfoot>

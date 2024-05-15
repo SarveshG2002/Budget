@@ -4,6 +4,7 @@ from decorators import login_required
 from models import Account, Category, Payment
 from datetime import datetime
 import pprint
+from sqlalchemy import func
 
 @app.route('/new_payment', methods=['GET', 'POST'])
 @login_required
@@ -193,6 +194,17 @@ def income():
 @app.route('/cashbook', methods=['GET', 'POST'])
 @login_required
 def cashbook():
+
+    income_sum = db.session.query(func.sum(Payment.amount)) \
+                           .filter(Payment.user_id == session['user_id']) \
+                           .filter(Payment.transaction_type == "income") \
+                           .scalar()
+    
+    expense_sum = db.session.query(func.sum(Payment.amount)) \
+                           .filter(Payment.user_id == session['user_id']) \
+                           .filter(Payment.transaction_type == "expense") \
+                           .scalar()
+
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                 .outerjoin(Account, Payment.account == Account.id) \
                 .order_by(Payment.id.desc())
@@ -200,8 +212,10 @@ def cashbook():
     
     query = query.filter(Payment.user_id==session['user_id'])
     incomes = query.all()
-    pprint.pprint(incomes)
-    return render_template('cashbook.html',incomes=incomes)
+    # pprint.pprint(incomes)
+    print(income_sum)
+    tot=income_sum-expense_sum;
+    return render_template('cashbook.html',incomes=incomes,tot=tot)
 
 
 
