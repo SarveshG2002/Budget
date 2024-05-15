@@ -213,9 +213,10 @@ def cashbook():
     query = query.filter(Payment.user_id==session['user_id'])
     incomes = query.all()
     # pprint.pprint(incomes)
-    print(income_sum)
+    # print(income_sum)
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
     tot=income_sum-expense_sum;
-    return render_template('cashbook.html',incomes=incomes,tot=tot)
+    return render_template('cashbook.html',incomes=incomes,tot=tot,accounts=accounts)
 
 
 
