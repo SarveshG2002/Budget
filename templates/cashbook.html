@@ -23,15 +23,53 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%;">Sr.</th>
-                                <th style="width: 70%;">Category Name</th>
-                                <th style="width: 20%">Action</th>
+                                <th style="width: 10%;">Date</th>
+                                <th style="width: 20%;">Type</th>
+                                <th style="width: 20%">Income Ammount</th>
+                                <th style="width: 20%">Expense Ammount</th>
+                                <th style="width: 20%">Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-
-                            </tr>
+                            {% set payment_amounts = [] %}
+                            {% for payment in incomes %}
+                                {% set payment_amount = payment.Payment.amount | int %}
+                                {% set _ = payment_amounts.append(payment_amount) %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ payment.Payment.date }}</td>
+                                    <td>{{ payment.Payment.transaction_type }}</td>
+                                    <td>
+                                        {% if payment.Payment.transaction_type == "income" %}
+                                            {{ payment_amount }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if payment.Payment.transaction_type == "expense" %}
+                                            {{ payment_amount }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        0
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
+                        
+                        <tfoot>
+                            <tr>
+                                <td colspan="4"></td>
+                                <th>Total</th>
+                                <th>{{ payment_amounts | sum }}</th>
+                                <td></td>
+                                
+                            </tr>
+                        </tfoot>
+                        
                     </table>
                 </div>
             </div>

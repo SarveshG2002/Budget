@@ -41,7 +41,7 @@ class Payment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
 
     def __repr__(self):
-        return f"<Payment id={self.id}, user_id={self.user_id}, amount={self.amount}, date={self.date}>"
+        return f"<Payment id={self.id}, user_id={self.user_id}, amount={self.amount}, date={self.date}, note={self.note}, account={self.account}, transaction_type={self.transaction_type}, created_at={self.created_at}>"
 
 class Income(db.Model):
     id = db.Column(db.Integer, primary_key=True)
