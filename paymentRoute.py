@@ -20,7 +20,7 @@ def new_payment():
         if not all([pdate, account_id, amount, category_id]):
             session['error'] = "Please fill in all required fields"
             return redirect(url_for('new_payment'))
-        
+
         current_datetime = datetime.now()
         formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -53,7 +53,7 @@ def payment_list():
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                     .outerjoin(Account, Payment.account == Account.id) \
                     .outerjoin(Category, Payment.category == Category.id)
-    
+
     query = query.filter(Payment.user_id==session['user_id'])
     query = query.filter(Payment.transaction_type=="expense")
     # Apply filters
@@ -94,7 +94,7 @@ def delete_payment(payment_id):
 #     payment = Payment.query.get(payment_id)
 #     accounts = Account.query.all()
 #     categories = Category.query.all()
-    
+
 #     return render_template('edit_payment.html', payment=payment,accounts=accounts,categories=categories)
 
 
@@ -150,7 +150,7 @@ def income():
         if not all([date,amount]):
             session['error'] = "Please fill in all required fields"
             return redirect(url_for('income'))
-        
+
         current_datetime = datetime.now()
         formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -171,8 +171,8 @@ def income():
 
         query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                     .outerjoin(Account, Payment.account == Account.id) \
-                    
-    
+
+
         query = query.filter(Payment.user_id==session['user_id'])
         query = query.filter(Payment.transaction_type=="income")
         # Apply filters
@@ -189,7 +189,7 @@ def income():
         # categories = Category.query.all()
         accounts = Account.query.filter_by(user_id=session['user_id']).all()
         return render_template('income.html',accounts=accounts,incomes=incomes)
-    
+
 
 @app.route('/cashbook', methods=['GET', 'POST'])
 @login_required
@@ -199,7 +199,7 @@ def cashbook():
                            .filter(Payment.user_id == session['user_id']) \
                            .filter(Payment.transaction_type == "income") \
                            .scalar()
-    
+
     expense_sum = db.session.query(func.sum(Payment.amount)) \
                            .filter(Payment.user_id == session['user_id']) \
                            .filter(Payment.transaction_type == "expense") \
@@ -208,14 +208,20 @@ def cashbook():
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                 .outerjoin(Account, Payment.account == Account.id) \
                 .order_by(Payment.id.desc())
-                    
-    
+
+
     query = query.filter(Payment.user_id==session['user_id'])
     incomes = query.all()
     # pprint.pprint(incomes)
     # print(income_sum)
     accounts = Account.query.filter_by(user_id=session['user_id']).all()
-    tot=income_sum-expense_sum;
+    if income_sum is None:
+        income_sum=0
+    if expense_sum is None:
+        expense_sum=0
+
+    # print()
+    tot=income_sum-expense_sum
     return render_template('cashbook.html',incomes=incomes,tot=tot,accounts=accounts)
 
 
