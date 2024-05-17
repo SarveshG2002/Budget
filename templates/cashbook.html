@@ -50,10 +50,11 @@
                             <tr>
                                 <th style="width: 10%;">Sr.</th>
                                 <th style="width: 10%;">Date</th>
-                                <th style="width: 20%;">Type</th>
-                                <th style="width: 20%">Income Ammount</th>
-                                <th style="width: 20%">Expense Ammount</th>
-                                <th style="width: 20%">Total</th>
+                                <th style="width: 20%">Account</th>
+                                <th style="width: 15%;">Type</th>
+                                <th style="width: 15%">Income Ammount</th>
+                                <th style="width: 15%">Expense Ammount</th>
+                                <th style="width: 15%">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,7 @@
                                 <tr>
                                     <td>{{ loop.index }}</td>
                                     <td>{{ payment.Payment.date }}</td>
+                                    <td>{{ payment.acc_name }}</td>
                                     <td>{{ payment.Payment.transaction_type|capitalize }}</td>
                                     <td>
                                         {% if payment.Payment.transaction_type == "income" %}

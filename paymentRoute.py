@@ -220,7 +220,7 @@ def cashbook():
     if expense_sum is None:
         expense_sum=0
 
-    # print()
+    print(incomes)
     tot=income_sum-expense_sum
     return render_template('cashbook.html',incomes=incomes,tot=tot,accounts=accounts)
 
