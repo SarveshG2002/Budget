@@ -75,7 +75,7 @@
                                     <td>
                                         {% if payment.Payment.transaction_type == "income" %}
                                             {{ payment_amount }}
-                                            {% set _ = total_income.append(payment_amount) %}
+                                            
                                             
                                         {% else %}
                                             0
@@ -106,7 +106,7 @@
                         
                         <tfoot>
                             <tr>
-                                <td colspan="2"></td>
+                                <td colspan="4"></td>
                                 <th>Total</th>
                                 <th>{{ total_income | sum }}</th>
                                 <th>{{ total_expense | sum }}</th>
@@ -116,6 +116,8 @@
                         </tfoot>
                         
                     </table>
+
+                    
                 </div>
             </div>
             <!-- </div> -->
