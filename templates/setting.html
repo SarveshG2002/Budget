@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body>
+
+    {% include 'header-layout.html' %}
+
+
+    <div class="side_main">
+        {% include 'sidebar.html' %}
+
+        <div class="main">
+            <!-- <div class="container mt-5"> -->
+            <div class="card">
+                <div class="card-header">
+                    Settings
+                </div>
+                <div class="card-body">
+                    
+
+
+
+                    <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12 row">
+                            <div class="col-md-3 form-group">
+                                <label for="old_password">Old Password</label>
+                                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Enter Old Password">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="new_password">New Password</label>
+                                <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter New Password">
+                            </div>
+                            <div class="col-md-6 form-group"></div>
+                            <div class="col-md-6 mt-3 form-group">
+                                <input type="submit" name="submit" value="Change Password" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+            <!-- </div> -->
+
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+
+</html>

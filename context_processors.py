@@ -57,7 +57,15 @@ def sidebar():
             'name':'Transfer',
             'link':'transfer',
             'page':'transfer',
-            'icon': 'account_balance',
+            'icon': 'send_money',
+            'indicator': request.endpoint
+        },
+
+        {
+            'name':'Settings',
+            'link':'setting',
+            'page':'setting',
+            'icon': 'settings',
             'indicator': request.endpoint
         }
 

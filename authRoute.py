@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, session
-from flask_app import app
+from flask_app import app,db
 from models import Users
 from decorators import login_required  # Import the login_required decorator
 
@@ -56,3 +56,24 @@ def index():
     # session.clear()
     # Redirect to the login page
     return redirect(url_for('login'))
+
+@app.route('/setting', methods=['GET', 'POST'])
+@login_required
+def setting():
+    if request.method == 'POST':
+        old_password = request.form['old_password']
+        new_password = request.form['new_password']
+        
+        user_id = session.get('user_id')
+        user = Users.query.get(user_id)
+        
+        if user and user.password== old_password:
+            user.password = new_password
+            db.session.commit()
+            session['success'] = "Password changed successfully."
+        else:
+            session['error'] = "Old password is incorrect."
+        
+        return redirect(url_for('setting'))
+    
+    return render_template('setting.html')
