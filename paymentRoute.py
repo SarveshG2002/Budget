@@ -5,6 +5,7 @@ from models import Account, Category, Payment
 from datetime import datetime
 import pprint
 from sqlalchemy import func
+from sqlalchemy.sql import text
 
 @app.route('/new_payment', methods=['GET', 'POST'])
 @login_required
@@ -159,6 +160,7 @@ def income():
         db.session.add(new_payment)
         db.session.commit()
 
+        print("First Call")
         # # Redirect to a success page or wherever needed
         session['success'] = "Income Added Successfully"
         return redirect(url_for('income'))
@@ -169,7 +171,7 @@ def income():
         to_date = request.args.get('to_date')
         account_id = request.args.get('account')
 
-        query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
+        query = db.session.query(Payment, Account.acc_name) \
                     .outerjoin(Account, Payment.account == Account.id) \
 
 
@@ -183,6 +185,7 @@ def income():
 
         # Execute the query
         incomes = query.all()
+        
 
         # Render the form with account and category options
         # accounts = Account.query.all()
@@ -205,13 +208,16 @@ def cashbook():
                            .filter(Payment.transaction_type == "expense") \
                            .scalar()
 
-    query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
+    query = db.session.query(Payment, Account.acc_name, Category.name) \
                 .outerjoin(Account, Payment.account == Account.id) \
+                .outerjoin(Category, Payment.category == Category.id) \
                 .order_by(Payment.id.desc())
 
 
     query = query.filter(Payment.user_id==session['user_id'])
     incomes = query.all()
+    # compiled_query = str(query.statement.compile(db.engine, compile_kwargs={"literal_binds": True}))
+    # print(compiled_query)
     # pprint.pprint(incomes)
     # print(income_sum)
     accounts = Account.query.filter_by(user_id=session['user_id']).all()
@@ -220,7 +226,7 @@ def cashbook():
     if expense_sum is None:
         expense_sum=0
 
-    print(incomes)
+    # print(incomes)
     tot=income_sum-expense_sum
     return render_template('cashbook.html',incomes=incomes,tot=tot,accounts=accounts)
 
