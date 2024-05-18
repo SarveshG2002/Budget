@@ -66,14 +66,7 @@ def sidebar():
             'page':'setting',
             'icon': 'settings',
             'indicator': request.endpoint
-        },
-        {
-            'name':'Backups',
-            'link':'backup',
-            'page':'backup',
-            'icon': 'backup',
-            'indicator': request.endpoint
-        },
+        }
 
         # Add more sidebar items as needed
     ]
