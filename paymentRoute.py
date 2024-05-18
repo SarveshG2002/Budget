@@ -103,8 +103,8 @@ def delete_payment(payment_id):
 @login_required
 def edit_payment(payment_id):
     payment = Payment.query.get(payment_id)
-    accounts = Account.query.all()
-    categories = Category.query.all()
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    categories = Category.query.filter_by(user_id=session['user_id']).all()
 
     if request.method == 'POST':
         # Get the updated data from the form
@@ -131,8 +131,14 @@ def edit_payment(payment_id):
         return redirect(url_for('edit_payment', payment_id=payment_id))
 
     # Render the template with the payment details
-    payment.category = int(payment.category)
-    payment.account = int(payment.account)
+    def to_int(value):
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 0
+
+    payment.category = to_int(payment.category)
+    payment.account = to_int(payment.account)
     return render_template('edit_payment.html', payment=payment, accounts=accounts, categories=categories)
 
 
@@ -192,6 +198,46 @@ def income():
         # categories = Category.query.all()
         accounts = Account.query.filter_by(user_id=session['user_id']).all()
         return render_template('income.html',accounts=accounts,incomes=incomes)
+    
+
+@app.route('/edit_income/<int:payment_id>', methods=['GET', 'POST'])
+@login_required
+def edit_income(payment_id):
+    payment = Payment.query.get(payment_id)
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    # categories = Category.query.all()
+    if request.method == 'POST':
+        date = request.form.get('date')
+        account_id = request.form.get('account')
+        amount = request.form.get('amount')
+        # category_id = request.form.get('category')
+        # to = request.form.get('to')
+        note = request.form.get('note')
+
+        if not all([date,amount]):
+            session['error'] = "Please fill in all required fields"
+            return redirect(url_for('income'))
+
+        payment.date = date
+        payment.account = account_id
+        payment.amount = amount
+        # payment.category = category_id
+        # payment.to = to
+        payment.note = note
+        db.session.commit()
+        session['success'] = 'Income updated successfully'
+        return redirect(url_for('edit_income', payment_id=payment_id))
+        
+
+    # else:
+    def to_int(value):
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 0
+    payment.account = to_int(payment.account)
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    return render_template('edit_income.html',accounts=accounts,payment=payment)
 
 
 @app.route('/cashbook', methods=['GET', 'POST'])

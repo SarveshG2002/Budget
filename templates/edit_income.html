@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body>
+
+    {% include 'header-layout.html' %}
+
+
+    <div class="side_main">
+        {% include 'sidebar.html' %}
+
+        <div class="main">
+            <!-- <div class="container mt-5"> -->
+            <div class="card">
+                <div class="card-header">
+                    Edit Income
+                </div>
+                <div class="card-body">
+                    
+
+
+
+                    <form action="" class="col-md-12 row" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12 row">
+                            <div class="col-md-6 form-group">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" name="date" value="{{payment.date}}"
+                                placeholder="Enter Here">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="account">Account Name</label>
+                                <select name="account" id="account" class="form-control slim-select" required>
+                                    <option value="">Select Account</option>
+                                    {% for account in accounts %}
+                                    {% if account.id == payment.account %}
+                                    <option value="{{account.id}}" selected>{{account.acc_name}}</option>
+                                    {% else %}
+                                    <option value="{{account.id}}">{{account.acc_name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="amount">Amount</label>
+                                <input type="text" class="form-control" id="amount" name="amount" value="{{payment.amount}}"
+                                placeholder="Enter Here">
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label for="note">Note</label>
+                                <textarea name="note" id="note" cols="30" rows="3"
+                                    class="form-control">{{payment.note}}</textarea>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                
+                            </div>
+                            
+                            <div class="col-md-6 mt-3 form-group">
+                                <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                            </div>
+            
+            
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+                
+            </div>
+            
+            
+            <!-- </div> -->
+
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+
+</html>
