@@ -53,7 +53,8 @@ def payment_list():
     # Build the base query
     query = db.session.query(Payment, Account.acc_name, Category.name.label('category_name')) \
                     .outerjoin(Account, Payment.account == Account.id) \
-                    .outerjoin(Category, Payment.category == Category.id)
+                    .outerjoin(Category, Payment.category == Category.id) \
+                    .order_by(Payment.id.desc())
 
     query = query.filter(Payment.user_id==session['user_id'])
     query = query.filter(Payment.transaction_type=="expense")
