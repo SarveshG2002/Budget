@@ -77,3 +77,9 @@ def setting():
         return redirect(url_for('setting'))
     
     return render_template('setting.html')
+
+
+@app.route('/backup', methods=['GET', 'POST'])
+@login_required
+def backup():
+    return render_template('backup.html')
