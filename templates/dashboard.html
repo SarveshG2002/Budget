@@ -230,42 +230,68 @@
     {% include 'footer.html' %}
     <script>
 
+        var myChart
+        function createChart(incomeData,expenseData){
+            const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
 
-        const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-
-        new Chart("myChart", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
-                    borderColor: "red",
-                    fill: false
-                }, {
-                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-                    borderColor: "green",
-                    fill: false
-                }]
-            },
-            options: {
-                legend: { display: false }
-            }
-        });
-        function showGraph(acc){
-            console.log(acc)
+            myChart= new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        data: incomeData,
+                        borderColor: "red",
+                        fill: false
+                    }, {
+                        data: expenseData,
+                        borderColor: "green",
+                        fill: false
+                    }]
+                },
+                options: {
+                    legend: { display: false }
+                }
+            });
         }
-    </script>
 
-<script>
-    function generate_color(baseColor, hue) {
-        // Convert base color to HSL (Hue, Saturation, Lightness)
-        var hsl = tinycolor(baseColor).toHsl();
-        // Adjust the hue by the variation
-        hsl.h += hue;
-        // Convert back to hex color
-        return tinycolor(hsl).toHexString();
-    }
-</script>
+
+        function updateChart(incomeData, expenseData) {
+            // Update chart data
+            // myChart.data.labels = incomeData.labels;
+            myChart.data.datasets[0].data = incomeData;
+            myChart.data.datasets[1].data = expenseData;
+            // Update chart options if needed
+            // myChart.options.title.text = 'Updated Title';
+            // Update the chart
+            myChart.update();
+        }
+        function showGraph(acc,st="end"){
+            console.log(acc)
+            $.ajax({
+                url: '/getGarphData',  // Specify the URL for your AJAX request
+                method: 'POST',  // Specify the HTTP method (e.g., 'POST')
+                data: {account: acc},  // Pass data to the server (if needed)
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log('AJAX request successful:', response);
+                    if(st=="start"){
+                        createChart(response.income,response.expense); 
+                    }else{
+                        updateChart(response.income,response.expense); 
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors (if any)
+                    console.error('AJAX request failed:', status, error);
+                }
+            });
+        }
+        $(document).ready(function() {
+            // createChart();
+            // fetchGraphData();
+            showGraph(1,"start")
+        });
+    </script>
 </body>
 
 </html>

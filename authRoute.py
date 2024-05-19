@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session,jsonify
 from flask_app import app,db
 from models import Users,Account, Category, Payment
 from decorators import login_required  # Import the login_required decorator
@@ -150,7 +150,9 @@ def setting():
     return render_template('setting.html')
 
 
-@app.route('/backup', methods=['GET', 'POST'])
+@app.route('/getGarphData', methods=['GET', 'POST'])
 @login_required
-def backup():
-    return render_template('backup.html')
+def getGarphData():
+    expense = [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478]
+    income = [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 600]
+    return jsonify({'income': income, 'expense': expense})
