@@ -191,7 +191,13 @@
 
             <div class="graph-statistics">
                 <div class="statistic">
-                    <canvas id="myChart" style="width:100%;height: 400px;"></canvas>
+                    <div id="account-buttons">
+                        <button class="btn btn-primary" onclick="showGraph('all')">All</button>
+                        {% for account, color in accounts %}
+                            <button class="btn account-button" onclick="showGraph('{{account.id}}')" style="background-color: {{ color }}; color:white">{{ account.acc_name }}</button>
+                        {% endfor %}
+                    </div>
+                    <canvas id="myChart" style="width:100%;height: 400px;" class="mt-2"></canvas>
                 </div>
 
                 <div class="statistic">
@@ -245,7 +251,21 @@
                 legend: { display: false }
             }
         });
+        function showGraph(acc){
+            console.log(acc)
+        }
     </script>
+
+<script>
+    function generate_color(baseColor, hue) {
+        // Convert base color to HSL (Hue, Saturation, Lightness)
+        var hsl = tinycolor(baseColor).toHsl();
+        // Adjust the hue by the variation
+        hsl.h += hue;
+        // Convert back to hex color
+        return tinycolor(hsl).toHexString();
+    }
+</script>
 </body>
 
 </html>

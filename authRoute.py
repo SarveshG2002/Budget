@@ -4,6 +4,8 @@ from models import Users,Account, Category, Payment
 from decorators import login_required  # Import the login_required decorator
 from sqlalchemy import func
 from datetime import date,datetime,timedelta
+import random
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -98,11 +100,19 @@ def dashboard():
     if month_income_sum is None:
         month_income_sum=0
 
+    def generate_color():
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        return f'rgb({r}, {g}, {b})'
 
+    accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    # ccounts = ['Account 1', 'Account 2', 'Account 3']
+    colors = [generate_color() for _ in accounts]
     
     
     # Placeholder for dashboard logic
-    return render_template('dashboard.html',total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum)
+    return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum)
 
 @app.route('/logout')
 def logout():
