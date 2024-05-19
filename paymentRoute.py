@@ -246,12 +246,16 @@ def edit_income(payment_id):
 def cashbook():
 
     account_id = request.args.get('account')
+    from_date = request.args.get('from_date')
+    to_date = request.args.get('to_date')
 
     income_query = db.session.query(func.sum(Payment.amount)) \
                              .filter(Payment.user_id == session['user_id']) \
                              .filter(Payment.transaction_type == "income")
     if account_id:
         income_query = income_query.filter(Payment.account == account_id)
+    if from_date and to_date:
+            income_query = income_query.filter(Payment.date.between(from_date, to_date))
     income_sum = income_query.scalar()
 
     expense_query = db.session.query(func.sum(Payment.amount)) \
@@ -259,6 +263,8 @@ def cashbook():
                               .filter(Payment.transaction_type == "expense")
     if account_id:
         expense_query = expense_query.filter(Payment.account == account_id)
+    if from_date and to_date:
+            expense_query = expense_query.filter(Payment.date.between(from_date, to_date))
     expense_sum = expense_query.scalar()
 
     query = db.session.query(Payment, Account.acc_name, Category.name) \
@@ -268,6 +274,8 @@ def cashbook():
 
 
     query = query.filter(Payment.user_id==session['user_id'])
+    if from_date and to_date:
+            query = query.filter(Payment.date.between(from_date, to_date))
     if account_id:
             query = query.filter(Payment.account == account_id)
     incomes = query.all()
@@ -276,6 +284,7 @@ def cashbook():
     # pprint.pprint(incomes)
     # print(income_sum)
     accounts = Account.query.filter_by(user_id=session['user_id']).all()
+    
     if income_sum is None:
         income_sum=0
     if expense_sum is None:
