@@ -245,15 +245,21 @@ def edit_income(payment_id):
 @login_required
 def cashbook():
 
-    income_sum = db.session.query(func.sum(Payment.amount)) \
-                           .filter(Payment.user_id == session['user_id']) \
-                           .filter(Payment.transaction_type == "income") \
-                           .scalar()
+    account_id = request.args.get('account')
 
-    expense_sum = db.session.query(func.sum(Payment.amount)) \
-                           .filter(Payment.user_id == session['user_id']) \
-                           .filter(Payment.transaction_type == "expense") \
-                           .scalar()
+    income_query = db.session.query(func.sum(Payment.amount)) \
+                             .filter(Payment.user_id == session['user_id']) \
+                             .filter(Payment.transaction_type == "income")
+    if account_id:
+        income_query = income_query.filter(Payment.account == account_id)
+    income_sum = income_query.scalar()
+
+    expense_query = db.session.query(func.sum(Payment.amount)) \
+                              .filter(Payment.user_id == session['user_id']) \
+                              .filter(Payment.transaction_type == "expense")
+    if account_id:
+        expense_query = expense_query.filter(Payment.account == account_id)
+    expense_sum = expense_query.scalar()
 
     query = db.session.query(Payment, Account.acc_name, Category.name) \
                 .outerjoin(Account, Payment.account == Account.id) \
@@ -262,6 +268,8 @@ def cashbook():
 
 
     query = query.filter(Payment.user_id==session['user_id'])
+    if account_id:
+            query = query.filter(Payment.account == account_id)
     incomes = query.all()
     # compiled_query = str(query.statement.compile(db.engine, compile_kwargs={"literal_binds": True}))
     # print(compiled_query)
