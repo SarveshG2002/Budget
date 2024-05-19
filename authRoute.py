@@ -1,7 +1,9 @@
 from flask import render_template, request, redirect, url_for, session
 from flask_app import app,db
-from models import Users
+from models import Users,Account, Category, Payment
 from decorators import login_required  # Import the login_required decorator
+from sqlalchemy import func
+from datetime import date,datetime,timedelta
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -37,11 +39,70 @@ def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
     # Retrieve user information from session
-    user_id = session.get('user_id')
+    expense_sum = db.session.query(func.sum(Payment.amount)) \
+                           .filter(Payment.user_id == session['user_id']) \
+                           .filter(Payment.transaction_type == "expense") \
+                           .scalar()
+    
+    income_sum = db.session.query(func.sum(Payment.amount)) \
+                           .filter(Payment.user_id == session['user_id']) \
+                           .filter(Payment.transaction_type == "income") \
+                           .scalar()
+    
+    today = date.today()
+
+    # Calculate today's expenses
+    today_exp = db.session.query(func.sum(Payment.amount)) \
+                          .filter(Payment.user_id == session['user_id']) \
+                          .filter(Payment.transaction_type == "expense") \
+                          .filter(func.date(Payment.date) == today) \
+                          .scalar()
+    
+    start_of_month = today.replace(day=1)
+    next_month = today.replace(day=28) + timedelta(days=4)  # this will never fail
+    start_of_next_month = next_month.replace(day=1)
+    end_of_month = start_of_next_month - timedelta(days=1)
+
+    # Calculate total income for the current month
+    month_income_sum = db.session.query(func.sum(Payment.amount)) \
+                                 .filter(Payment.user_id == session['user_id']) \
+                                 .filter(Payment.transaction_type == "income") \
+                                 .filter(Payment.date >= start_of_month) \
+                                 .filter(Payment.date <= end_of_month) \
+                                 .scalar()
+    
+    month_expense_sum = db.session.query(func.sum(Payment.amount)) \
+                                 .filter(Payment.user_id == session['user_id']) \
+                                 .filter(Payment.transaction_type == "Expense") \
+                                 .filter(Payment.date >= start_of_month) \
+                                 .filter(Payment.date <= end_of_month) \
+                                 .scalar()
+
+    # Handle None case for month_income_sum
+    if month_income_sum is None:
+        month_income_sum = 0
+    
+    if month_expense_sum is None:
+        month_expense_sum = 0
+    
+    if today_exp is None:
+        today_exp = 0
+
+    # Handle None case for expense_sum
+    if expense_sum is None:
+        expense_sum = 0
+
+    if income_sum is None:
+        income_sum = 0
+    
+    if month_income_sum is None:
+        month_income_sum=0
+
+
     
     
     # Placeholder for dashboard logic
-    return render_template('dashboard.html')
+    return render_template('dashboard.html',total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum)
 
 @app.route('/logout')
 def logout():

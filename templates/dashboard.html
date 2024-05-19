@@ -6,7 +6,7 @@
     <style>
         .statistics {
             display: grid;
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto;
             column-gap: 10px;
             width: 100%;
         }
@@ -79,7 +79,7 @@
 
         @media (max-width: 600px) {
             .statistics {
-                grid-template-columns: 50% auto;
+                grid-template-columns: auto auto;
                 row-gap: 10px;
                 /* display: grid; */
                 /* grid-template-columns: 200px auto; */
@@ -108,7 +108,7 @@
         {% include 'sidebar.html' %}
 
         <div class="main" id="main_panel">
-            <h1>Welcome to the Dashboard, {{ username }}!</h1>
+            
             <div class="statistics">
                 <div class="statistic">
                     <div class="child">
@@ -121,7 +121,7 @@
                             Total Expense
                         </div>
                         <div class="child_price">
-                            $15000
+                            {{total_exp}}
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,22 @@
                             Today Expense
                         </div>
                         <div class="child_price">
-                            $15000
+                            {{today_exp}}
+                        </div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="child">
+                        <span class="material-symbols-outlined">
+                            calendar_month
+                        </span>
+                    </div>
+                    <div class="child">
+                        <div class="child_head">
+                            This Month Expense
+                        </div>
+                        <div class="child_price">
+                            {{month_expense_sum}}
                         </div>
                     </div>
                 </div>
@@ -151,7 +166,7 @@
                             Total Income
                         </div>
                         <div class="child_price">
-                            $15000
+                            {{total_inc}}
                         </div>
                     </div>
                 </div>
@@ -166,7 +181,7 @@
                             This Month Income
                         </div>
                         <div class="child_price">
-                            $15000
+                            {{month_income_sum}}
                         </div>
                     </div>
                 </div>
