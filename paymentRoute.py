@@ -65,7 +65,7 @@ def payment_list():
         query = query.filter(Payment.account == account_id)
     if category_id:
         query = query.filter(Payment.category == category_id)
-
+    # query = query.filter(Payment.category == category_id)
     # Execute the query
     payments = query.all()
     accounts = Account.query.filter_by(user_id=session['user_id']).all()
@@ -180,6 +180,7 @@ def income():
 
         query = db.session.query(Payment, Account.acc_name) \
                     .outerjoin(Account, Payment.account == Account.id) \
+                    .order_by(Payment.id.desc())
 
 
         query = query.filter(Payment.user_id==session['user_id'])

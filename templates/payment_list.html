@@ -63,13 +63,15 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th style="width: 5%;">Sr.</th>
-                                <th style="width: 15%;">Payment Date</th>
-                                <th style="width: 15%">Account Type</th>
+                                <th style="width: 3%;">Sr.</th>
+                                <th style="width: 10%;">Payment Date</th>
+                                <th style="width: 22%">Account Type</th>
                                 <th style="width: 10%">Category</th>
-                                <th style="width: 15%">Amount</th>
-                                <th style="width: 20%">To</th>
-                                <th style="width: 20%">Action</th>
+                                
+                                <th style="width: 15%">To</th>
+                                <th style="width: 20%">Note</th>
+                                <th style="width: 10%">Amount</th>
+                                <th style="width: 10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,8 +84,10 @@
                                     <td>{{ payment.Payment.date }}</td>
                                     <td>{{ payment.acc_name }}</td>
                                     <td>{{ payment.category_name }}</td>
-                                    <td>{{ payment_amount }}</td>
+                                    
                                     <td>{{ payment.Payment.to }}</td>
+                                    <td>{{ payment.Payment.note }}</td>
+                                    <td>{{ payment_amount }}</td>
                                     <td>
                                         <a href="{{ url_for('delete_payment', payment_id=payment.Payment.id) }}" onclick="return confirm('Are you Sure?')" class="btn btn-danger"><span class="material-symbols-outlined">
                                             delete

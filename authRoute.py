@@ -75,7 +75,7 @@ def dashboard():
     
     month_expense_sum = db.session.query(func.sum(Payment.amount)) \
                                  .filter(Payment.user_id == session['user_id']) \
-                                 .filter(Payment.transaction_type == "Expense") \
+                                 .filter(Payment.transaction_type == "expense") \
                                  .filter(Payment.date >= start_of_month) \
                                  .filter(Payment.date <= end_of_month) \
                                  .scalar()
@@ -176,7 +176,7 @@ ORDER BY
     m.month_start;
     """)
     # Execute the query
-    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"Expense"})
+    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})
     data = result.fetchall()
     label = []
     expense = []
@@ -184,7 +184,7 @@ ORDER BY
 
     
     
-    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"Income"})
+    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"income"})
     data1 = result.fetchall()
     count=0;
     for row in data:
