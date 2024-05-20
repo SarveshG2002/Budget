@@ -231,8 +231,8 @@
     <script>
 
         var myChart
-        function createChart(incomeData,expenseData){
-            const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+        function createChart(incomeData,expenseData,labels){
+            const xValues = labels;
 
             myChart= new Chart("myChart", {
                 type: "line",
@@ -255,11 +255,12 @@
         }
 
 
-        function updateChart(incomeData, expenseData) {
+        function updateChart(incomeData, expenseData,labels) {
             // Update chart data
             // myChart.data.labels = incomeData.labels;
             myChart.data.datasets[0].data = incomeData;
             myChart.data.datasets[1].data = expenseData;
+            myChart.data.labels = labels;
             // Update chart options if needed
             // myChart.options.title.text = 'Updated Title';
             // Update the chart
@@ -275,9 +276,9 @@
                     // Handle the response from the server
                     console.log('AJAX request successful:', response);
                     if(st=="start"){
-                        createChart(response.income,response.expense); 
+                        createChart(response.income,response.expense,response.label); 
                     }else{
-                        updateChart(response.income,response.expense); 
+                        updateChart(response.income,response.expense,response.label); 
                     }
                 },
                 error: function(xhr, status, error) {
