@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, session,jsonify
 from flask_app import app,db
 from models import Users,Account, Category, Payment
 from decorators import login_required  # Import the login_required decorator
-from sqlalchemy import func
+from sqlalchemy import func,text
 from datetime import date,datetime,timedelta
 import random
 
@@ -153,6 +153,47 @@ def setting():
 @app.route('/getGarphData', methods=['GET', 'POST'])
 @login_required
 def getGarphData():
-    expense = [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478]
-    income = [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 600]
-    return jsonify({'income': income, 'expense': expense})
+    expense_query = text("""
+        SELECT
+    IFNULL(SUM(p.amount), 0) AS total_amount,
+    DATE_FORMAT(m.month_start, '%Y-%m') AS year_month_number,
+    DATE_FORMAT(m.month_start, '%Y %M') AS year_month_name
+FROM
+    (
+        SELECT DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') AS month_start
+        FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a
+        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
+        WHERE DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') >= DATE_FORMAT(NOW() - INTERVAL 11 MONTH, '%Y-%m-01')
+        ORDER BY month_start
+        LIMIT 12
+    ) m
+LEFT JOIN
+    payment p ON DATE_FORMAT(p.date, '%Y-%m') = DATE_FORMAT(m.month_start, '%Y-%m')
+    AND p.user_id = :user_id AND p.transaction_type = :type  -- Replace 1 with the actual user ID
+GROUP BY
+    m.month_start
+ORDER BY
+    m.month_start;
+    """)
+    # Execute the query
+    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"Expense"})
+    data = result.fetchall()
+    label = []
+    expense = []
+    income = []
+
+    
+    
+    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"Income"})
+    data1 = result.fetchall()
+    count=0;
+    for row in data:
+        label.append(row.year_month_name)
+        expense.append(row.total_amount)
+        income.append(data1[count].total_amount)
+        count=count+1
+
+    # print(data)
+    # expense = [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478]
+    # income = [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 600]
+    return jsonify({'income': income, 'expense': expense,"label":label})
