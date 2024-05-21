@@ -108,7 +108,7 @@
         {% include 'sidebar.html' %}
 
         <div class="main" id="main_panel">
-            
+
             <div class="statistics">
                 <div class="statistic">
                     <div class="child">
@@ -194,7 +194,8 @@
                     <div id="account-buttons">
                         <button class="btn btn-primary" onclick="showGraph('all')">All</button>
                         {% for account, color in accounts %}
-                            <button class="btn account-button" onclick="showGraph('{{account.id}}')" style="background-color: {{ color }}; color:white">{{ account.acc_name }}</button>
+                        <button class="btn account-button" onclick="showGraph('{{account.id}}')"
+                            style="background-color: {{ color }}; color:white">{{ account.acc_name }}</button>
                         {% endfor %}
                     </div>
                     <canvas id="myChart" style="width:100%;height: 400px;" class="mt-2"></canvas>
@@ -205,20 +206,16 @@
                         Top Expense Category
                         <br>
 
-                        <div style="color: grey;margin-top: 10px;">
-                            <span>Food</span>
+                        {% for category, count, percentage in category %}
+                        <div style="color: grey; margin-top: 10px;">
+                            <span>{{ category }} ({{count}})</span>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div class="progress-bar" role="progressbar" style="width: {{ percentage }}%;"
+                                    aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">{{ percentage
+                                    }}%</div>
                             </div>
                         </div>
-                        <div style="color: grey;margin-top: 10px;">
-                            <span>Clothes</span>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -231,10 +228,10 @@
     <script>
 
         var myChart
-        function createChart(incomeData,expenseData,labels){
+        function createChart(incomeData, expenseData, labels) {
             const xValues = labels;
 
-            myChart= new Chart("myChart", {
+            myChart = new Chart("myChart", {
                 type: "line",
                 data: {
                     labels: xValues,
@@ -255,7 +252,7 @@
         }
 
 
-        function updateChart(incomeData, expenseData,labels) {
+        function updateChart(incomeData, expenseData, labels) {
             // Update chart data
             // myChart.data.labels = incomeData.labels;
             myChart.data.datasets[0].data = incomeData;
@@ -266,31 +263,31 @@
             // Update the chart
             myChart.update();
         }
-        function showGraph(acc,st="end"){
+        function showGraph(acc, st = "end") {
             console.log(acc)
             $.ajax({
                 url: '/getGarphData',  // Specify the URL for your AJAX request
                 method: 'POST',  // Specify the HTTP method (e.g., 'POST')
-                data: {account: acc},  // Pass data to the server (if needed)
-                success: function(response) {
+                data: { account: acc },  // Pass data to the server (if needed)
+                success: function (response) {
                     // Handle the response from the server
                     console.log('AJAX request successful:', response);
-                    if(st=="start"){
-                        createChart(response.income,response.expense,response.label); 
-                    }else{
-                        updateChart(response.income,response.expense,response.label); 
+                    if (st == "start") {
+                        createChart(response.income, response.expense, response.label);
+                    } else {
+                        updateChart(response.income, response.expense, response.label);
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     // Handle errors (if any)
                     console.error('AJAX request failed:', status, error);
                 }
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             // createChart();
             // fetchGraphData();
-            showGraph("all","start")
+            showGraph("all", "start")
         });
     </script>
 </body>

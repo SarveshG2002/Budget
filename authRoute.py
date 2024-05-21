@@ -109,10 +109,28 @@ def dashboard():
     accounts = Account.query.filter_by(user_id=session['user_id']).all()
     # ccounts = ['Account 1', 'Account 2', 'Account 3']
     colors = [generate_color() for _ in accounts]
-    
-    
+
+    expense_query = text("""
+                         SELECT
+                            c.name AS category_name,
+                            COUNT(*) AS category_count,
+                            (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `payment`)) AS percentage
+                        FROM
+                            `payment` p
+                        JOIN
+                            category c ON c.id = p.category
+                         
+                        GROUP BY
+                            c.name
+                        ORDER BY
+                            percentage DESC;
+
+                         """)
+    result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})
+    data = result.fetchall()
+    print(data);
     # Placeholder for dashboard logic
-    return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum)
+    return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum,category=data)
 
 @app.route('/logout')
 def logout():
