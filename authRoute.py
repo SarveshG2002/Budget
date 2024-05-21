@@ -112,18 +112,31 @@ def dashboard():
 
     expense_query = text("""
                          SELECT
-                            c.name AS category_name,
-                            COUNT(*) AS category_count,
-                            (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `payment`)) AS percentage
+                        c.name AS category_name,
+                        COUNT(*) AS category_count,
+                        SUM(p.amount) AS amt,
+                        (
+                            SUM(amount) * 100.0 /(
+                            SELECT
+                                SUM(amount)
+                            FROM
+                                `payment`
+                            WHERE
+                                transaction_type = 'expense' AND user_id = :user_id
+                        )
+                        ) AS percentage
                         FROM
                             `payment` p
-                        JOIN
-                            category c ON c.id = p.category
-                         
+                        JOIN category c ON
+                            c.id = p.category
+                        WHERE
+                            p.transaction_type = 'expense' AND p.user_id = :user_id
                         GROUP BY
                             c.name
                         ORDER BY
-                            percentage DESC;
+                            percentage
+                        DESC
+                        ;
 
                          """)
     result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})

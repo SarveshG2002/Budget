@@ -206,9 +206,9 @@
                         Top Expense Category
                         <br>
 
-                        {% for category, count, percentage in category %}
+                        {% for category, count, amount, percentage in category %}
                         <div style="color: grey; margin-top: 10px;">
-                            <span>{{ category }} ({{count}})</span>
+                            <span>{{ category }} - {{amount}}  ({{count}}) </span>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: {{ percentage }}%;"
                                     aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">{{ percentage
