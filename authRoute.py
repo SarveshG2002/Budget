@@ -153,28 +153,36 @@ def setting():
 @app.route('/getGarphData', methods=['GET', 'POST'])
 @login_required
 def getGarphData():
-    expense_query = text("""
+    account_id = request.form.get('account')
+    accq = ""
+    # print(account_id+"hello")
+    if account_id and account_id!="all":
+        
+        accq = "AND p.account = "+account_id
+    query_template = """
         SELECT
-    IFNULL(SUM(p.amount), 0) AS total_amount,
-    DATE_FORMAT(m.month_start, '%Y-%m') AS year_month_number,
-    DATE_FORMAT(m.month_start, '%Y %M') AS year_month_name
-FROM
-    (
-        SELECT DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') AS month_start
-        FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a
-        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
-        WHERE DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') >= DATE_FORMAT(NOW() - INTERVAL 11 MONTH, '%Y-%m-01')
-        ORDER BY month_start
-        LIMIT 12
-    ) m
-LEFT JOIN
-    payment p ON DATE_FORMAT(p.date, '%Y-%m') = DATE_FORMAT(m.month_start, '%Y-%m')
-    AND p.user_id = :user_id AND p.transaction_type = :type  -- Replace 1 with the actual user ID
-GROUP BY
-    m.month_start
-ORDER BY
-    m.month_start;
-    """)
+            IFNULL(SUM(p.amount), 0) AS total_amount,
+            DATE_FORMAT(m.month_start, '%Y-%m') AS year_month_number,
+            DATE_FORMAT(m.month_start, '%Y %M') AS year_month_name
+        FROM
+            (
+                SELECT DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') AS month_start
+                FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a
+                CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
+                WHERE DATE_FORMAT(NOW() - INTERVAL (a.a + (10 * b.a)) MONTH, '%Y-%m-01') >= DATE_FORMAT(NOW() - INTERVAL 11 MONTH, '%Y-%m-01')
+                ORDER BY month_start
+                LIMIT 12
+            ) m
+        LEFT JOIN
+            payment p ON DATE_FORMAT(p.date, '%Y-%m') = DATE_FORMAT(m.month_start, '%Y-%m')
+            AND p.user_id = :user_id AND p.transaction_type = :type {accq_clause}
+        GROUP BY
+            m.month_start
+        ORDER BY
+            m.month_start;
+    """.format(accq_clause=accq)
+    # print(query_template)
+    expense_query = text(query_template)
     # Execute the query
     result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})
     data = result.fetchall()
