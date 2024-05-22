@@ -154,10 +154,11 @@ def logout():
 
 @app.route('/')
 def index():
-    # Clear user session
-    # session.clear()
-    # Redirect to the login page
     return redirect(url_for('login'))
+
+@app.route('/register')
+def register():
+    return render_template(url_for('register.html'))
 
 @app.route('/setting', methods=['GET', 'POST'])
 @login_required
