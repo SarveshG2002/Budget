@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        :root {
+            --background-color: #f6f8fd;
+            --header-background-color: red;
+        }
+
+        body {
+            background-color: var(--background-color);
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            /* font-family: Arial, sans-serif; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        header {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--header-background-color);
+        }
+
+        header .headdiv {
+            display: grid;
+            grid-template-columns: 300px auto 300px;
+        }
+
+        header .headdiv .headlogo {
+            width: 100%;
+            padding: 20px;
+        }
+
+        header .headdiv .headlogo img {
+            width: 100%;
+        }
+
+        .navbar {
+            /* background-color: #333; */
+            color: #fff;
+            /* padding: 10px; */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center; /* Vertically center */
+            height: 100%; /* Set navbar height to 100% of the header */
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <header>
+        <div class="headdiv">
+            <div class="headlogo">
+                <img src="logo.png" alt="Budget">
+            </div>
+            <div class="navbar">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="options">
+                how
+            </div>
+        </div>
+    </header>
 </body>
+
 </html>
