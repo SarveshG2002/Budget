@@ -8,7 +8,7 @@
     <style>
         :root {
             --background-color: #f6f8fd;
-            --header-background-color: red;
+            --header-background-color: #fd8978;
         }
 
         body {
@@ -27,7 +27,7 @@
         header {
             width: 100%;
             /* padding: 10px; */
-            background-color: var(--header-background-color);
+            
         }
 
         header .headdiv {
@@ -45,13 +45,13 @@
         }
 
 
-        .navbar li { 
+        header .navbar li { 
             display: table-cell; 
             position: relative; 
             padding: 15px 0;
         }
-        .navbar a {
-            color: #fff;
+        header .navbar a {
+            color: black;
             text-transform: uppercase;
             text-decoration: none;
             letter-spacing: 0.15em;
@@ -60,7 +60,7 @@
             padding: 15px 20px;
             position: relative;
         }
-        .navbar a:after {    
+        header .navbar a:after {    
             background: none repeat scroll 0 0 transparent;
             bottom: 0;
             content: "";
@@ -68,14 +68,34 @@
             height: 2px;
             left: 50%;
             position: absolute;
-            background: #fff;
+            background: black;
             transition: width 0.3s ease 0s, left 0.3s ease 0s;
             width: 0;
             
         }
-        .navbar a:hover:after { 
+        header .navbar a:hover:after { 
             width: 100%; 
             left: 0; 
+        }
+
+        header .options{
+            display: flex;
+            align-items: center; /* Vertically center */
+        }
+
+        header .options div{
+            padding: 20px;
+            border-radius: 10px;
+            background-color: var(--header-background-color);
+            width: fit-content;
+            display: inline-block;
+            color: #f6f8fd;
+        }
+
+        header .options div:first-child {
+            margin-right: 10px; /* Add specific CSS for the first div */
+            background-color: var(--background-color);
+            color: black;
         }
 
 
@@ -92,14 +112,18 @@
             </div>
             <div class="navbar">
                 <ul>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#">Portfolio</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
                   </ul>
             </div>
             <div class="options">
-                how
+                <div>
+                    Sign in
+                </div>
+                <div>
+                    Sign up
+                </div>
             </div>
         </div>
     </header>
