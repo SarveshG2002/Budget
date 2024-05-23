@@ -5,6 +5,8 @@ from context_processors import sidebar, username
 
 app = Flask(__name__)
 
+app.static_folder = 'static'
+
 # Configure SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3310/budget'
 db = SQLAlchemy(app)
