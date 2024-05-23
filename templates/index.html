@@ -26,7 +26,7 @@
 
         header {
             width: 100%;
-            padding: 10px;
+            /* padding: 10px; */
             background-color: var(--header-background-color);
         }
 
@@ -44,25 +44,43 @@
             width: 100%;
         }
 
-        .navbar {
-            /* background-color: #333; */
-            color: #fff;
-            /* padding: 10px; */
-            display: flex;
-            justify-content: flex-start;
-            align-items: center; /* Vertically center */
-            height: 100%; /* Set navbar height to 100% of the header */
-        }
 
+        .navbar li { 
+            display: table-cell; 
+            position: relative; 
+            padding: 15px 0;
+        }
         .navbar a {
             color: #fff;
+            text-transform: uppercase;
             text-decoration: none;
-            padding: 10px;
+            letter-spacing: 0.15em;
+
+            display: inline-block;
+            padding: 15px 20px;
+            position: relative;
+        }
+        .navbar a:after {    
+            background: none repeat scroll 0 0 transparent;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            background: #fff;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+            
+        }
+        .navbar a:hover:after { 
+            width: 100%; 
+            left: 0; 
         }
 
-        .navbar a:hover {
-            background-color: #555;
-        }
+
+
+       
     </style>
 </head>
 
@@ -73,9 +91,12 @@
                 <img src="logo.png" alt="Budget">
             </div>
             <div class="navbar">
-                <a href="#">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Support</a>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
             </div>
             <div class="options">
                 how
