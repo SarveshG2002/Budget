@@ -118,6 +118,59 @@
             text-align: center;
             /* Center text horizontally within the div */
         }
+
+        .main_body .first>div:last-child {
+            /* background-color: #fd8978; */
+            width: 100%;
+            padding: 50px;
+            box-sizing: border-box;
+            /* width: 100%;
+            font-size: 50px;
+            text-align: center; */
+            /* Center text horizontally within the div */
+        }
+
+        .main_body .first>div:last-child .circle {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            border-radius: 50%;
+        }
+
+        .main_body .first>div:last-child .circle1 {
+            /* background-color: red; */
+            background: linear-gradient(to bottom, #535fec, #acd4ff);
+        }
+
+        .main_body .first>div:last-child .circle2 {
+            width: 500px;
+            height: 500px;
+            /* background-color: yellow; */
+            background: linear-gradient(to bottom, #535fec, #fda060);
+        }
+
+        .over-object {
+            position: absolute;
+            
+            top: 25rem;
+            margin-left: 100px;
+            /* margin: 0px; */
+            z-index: 1;
+        }
+
+        .laptop {
+            width: 300px;
+            /* Adjust width as needed */
+            height: 200px;
+            /* Adjust height as needed */
+            background-image: url('../static/logo.png');
+            /* background-color: aqua; */
+            /* Set the background image */
+            background-size: cover;
+            /* Ensure the image covers the entire div */
+            background-position: center;
+            /* Center the image within the div */
+        }
     </style>
 </head>
 
@@ -151,13 +204,20 @@
                 Thesis Archiving System
             </div>
             <div>
-                <div class="circle1">
+
+                <div class="circle1 circle">
 
                 </div>
-                <div class="circle2">
+                <div class="circle2 circle">
+
+                </div>
+                <div class="over-object laptop">
 
                 </div>
             </div>
+        </div>
+        <div class="second" style="height: 1000px;width: 100%;background-color: #535fec;">
+
         </div>
     </div>
 </body>
