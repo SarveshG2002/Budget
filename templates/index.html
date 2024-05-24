@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap" rel="stylesheet">
     <style>
         :root {
             --background-color: #f6f8fd;
@@ -17,7 +19,9 @@
             padding: 0px;
             box-sizing: border-box;
             /* font-family: Arial, sans-serif; */
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+            font-family: cursive;
+            /* font-family: 'danfo', sans-serif; */
         }
 
         * {
@@ -103,9 +107,9 @@
             color: black;
         }
 
-        .main_body .first {
+        .main_body .first , .second{
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 55% auto;
             align-items: center;
             /* Center vertically */
             justify-items: center;
@@ -116,8 +120,16 @@
             width: 100%;
             font-size: 50px;
             text-align: center;
+            /* justify-items: center; */
             /* Center text horizontally within the div */
         }
+
+        /* .main_body .first>div:first-child div{
+            width: 50%;
+            font-size: 50px;
+            text-align: center;
+            /* Center text horizontally within the div 
+        } */
 
         .main_body .first>div:last-child {
             /* background-color: #fd8978; */
@@ -152,18 +164,20 @@
         .over-object {
             position: absolute;
             
-            top: 20rem;
-            margin-left: 0px;
+            top: 12rem;
+            margin-left: -50px;
             /* margin: 0px; */
             z-index: 1;
         }
 
         .laptop {
-            width: 500px;
+            width: 700px;
             /* Adjust width as needed */
-            height: 400px;
+            height: 600px;
             /* Adjust height as needed */
-            background-image: url('../static/flap2.png');
+            /* background-image: url('../static/flap2.png'); */
+            background-image: url('{{ url_for("static", filename="flap2.png") }}');
+
             /* background-color: aqua; */
             /* Set the background image */
             background-size: cover;
@@ -172,6 +186,23 @@
             transition: transform 0.5s ease;
             /* Center the image within the div */
         }
+
+        .main_body .second{
+            background-color: #1c0845;
+            /* height: 1000px; */
+            padding: 00px;
+        }
+        .main_body .second .second_laptop{
+            width: 950px;
+            height: 950px;
+            /* background-image: url('../static/FREE\ Isometric\ Laptop\ Illustration.jpg'); */
+            background-image: url('{{ url_for("static", filename="flap3.jpg") }}');
+            background-size: cover;
+            /* Ensure the image covers the entire div */
+            background-position: center;
+            transition: transform 0.5s ease;
+            /* margin-left: 100px; */
+        }
     </style>
 </head>
 
@@ -179,8 +210,8 @@
     <header>
         <div class="headdiv">
             <div class="headlogo">
-                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
-                <img src="../static/logo.png" alt="Budget">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
+                <!-- <img src="../static/logo.png" alt="Budget"> -->
             </div>
             <div class="navbar">
                 <ul>
@@ -202,7 +233,9 @@
     <div class="main_body">
         <div class="first">
             <div>
-                Thesis Archiving System
+               <div>
+                Personal Account Management System
+               </div>
             </div>
             <div>
 
@@ -216,10 +249,20 @@
 
                 </div>
             </div>
-        </div>
-        <div class="second" style="height: 1000px;width: 100%;background-color: #535fec;">
+
 
         </div>
+        <div class="second">
+            <div>
+
+            </div>
+            <div>
+                <div class="second_laptop">
+
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <script>
@@ -238,14 +281,19 @@
             var scaleFactor = 1 + (scrollTop / 1000); // Adjust the factor as needed
             circle1.style.transform = 'scale(' + scaleFactor + ')';
             circle2.style.transform = 'scale(' + scaleFactor + ')';
+            // circle1.style.transform = 'rotate(' + rotation + 'deg)';
+            // circle2.style.transform = 'rotate(' + rotation + 'deg)';
+
+
+            var secondLaptop = document.querySelector('.second_laptop');
+            var scrollPosition = window.scrollY;
+            var screenWidth = window.innerWidth;
+            var laptopWidth = secondLaptop.offsetWidth;
+            var maxRightPosition = screenWidth - laptopWidth;
+            var newPosition = (scrollPosition / (document.body.clientHeight - window.innerHeight)) * maxRightPosition;
+            secondLaptop.style.right = newPosition + 'px';
         });
         </script>
-
-<script>
-    document.addEventListener('scroll', function() {
-        
-    });
-</script>
 
         
 </body>
