@@ -224,12 +224,29 @@
 
     <script>
         document.addEventListener('scroll', function() {
+
+            // For Laptop Rotation
             var laptop = document.querySelector('.laptop');
             var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            var rotation = scrollTop * 0.1; // Scale down the rotation
+            var rotation = scrollTop * -0.05; // Scale down the rotation
             laptop.style.transform = 'rotate(' + rotation + 'deg)';
+
+            // For Circle Scalling
+            var circle1 = document.querySelector('.circle1');
+            var circle2 = document.querySelector('.circle2');
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var scaleFactor = 1 + (scrollTop / 1000); // Adjust the factor as needed
+            circle1.style.transform = 'scale(' + scaleFactor + ')';
+            circle2.style.transform = 'scale(' + scaleFactor + ')';
         });
         </script>
+
+<script>
+    document.addEventListener('scroll', function() {
+        
+    });
+</script>
+
         
 </body>
 
