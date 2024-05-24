@@ -152,23 +152,24 @@
         .over-object {
             position: absolute;
             
-            top: 25rem;
-            margin-left: 100px;
+            top: 20rem;
+            margin-left: 0px;
             /* margin: 0px; */
             z-index: 1;
         }
 
         .laptop {
-            width: 300px;
+            width: 500px;
             /* Adjust width as needed */
-            height: 200px;
+            height: 400px;
             /* Adjust height as needed */
-            background-image: url('../static/logo.png');
+            background-image: url('../static/flap2.png');
             /* background-color: aqua; */
             /* Set the background image */
             background-size: cover;
             /* Ensure the image covers the entire div */
             background-position: center;
+            transition: transform 0.5s ease;
             /* Center the image within the div */
         }
     </style>
@@ -220,6 +221,16 @@
 
         </div>
     </div>
+
+    <script>
+        document.addEventListener('scroll', function() {
+            var laptop = document.querySelector('.laptop');
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var rotation = scrollTop * 0.1; // Scale down the rotation
+            laptop.style.transform = 'rotate(' + rotation + 'deg)';
+        });
+        </script>
+        
 </body>
 
 </html>
