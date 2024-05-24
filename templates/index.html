@@ -27,7 +27,7 @@
         header {
             width: 100%;
             /* padding: 10px; */
-            
+
         }
 
         header .headdiv {
@@ -45,11 +45,12 @@
         }
 
 
-        header .navbar li { 
-            display: table-cell; 
-            position: relative; 
+        header .navbar li {
+            display: table-cell;
+            position: relative;
             padding: 15px 0;
         }
+
         header .navbar a {
             color: black;
             text-transform: uppercase;
@@ -60,7 +61,8 @@
             padding: 15px 20px;
             position: relative;
         }
-        header .navbar a:after {    
+
+        header .navbar a:after {
             background: none repeat scroll 0 0 transparent;
             bottom: 0;
             content: "";
@@ -71,19 +73,21 @@
             background: black;
             transition: width 0.3s ease 0s, left 0.3s ease 0s;
             width: 0;
-            
-        }
-        header .navbar a:hover:after { 
-            width: 100%; 
-            left: 0; 
+
         }
 
-        header .options{
+        header .navbar a:hover:after {
+            width: 100%;
+            left: 0;
+        }
+
+        header .options {
             display: flex;
-            align-items: center; /* Vertically center */
+            align-items: center;
+            /* Vertically center */
         }
 
-        header .options div{
+        header .options div {
             padding: 20px;
             border-radius: 10px;
             background-color: var(--header-background-color);
@@ -93,14 +97,27 @@
         }
 
         header .options div:first-child {
-            margin-right: 10px; /* Add specific CSS for the first div */
+            margin-right: 10px;
+            /* Add specific CSS for the first div */
             background-color: var(--background-color);
             color: black;
         }
 
+        .main_body .first {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            /* Center vertically */
+            justify-items: center;
+            /* Center horizontally */
+        }
 
-
-       
+        .main_body .first>div:first-child {
+            width: 100%;
+            font-size: 50px;
+            text-align: center;
+            /* Center text horizontally within the div */
+        }
     </style>
 </head>
 
@@ -108,14 +125,15 @@
     <header>
         <div class="headdiv">
             <div class="headlogo">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
+                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
+                <img src="../static/logo.png" alt="Budget">
             </div>
             <div class="navbar">
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Portfolio</a></li>
                     <li><a href="#">Blog</a></li>
-                  </ul>
+                </ul>
             </div>
             <div class="options">
                 <div>
@@ -127,6 +145,21 @@
             </div>
         </div>
     </header>
+    <div class="main_body">
+        <div class="first">
+            <div>
+                Thesis Archiving System
+            </div>
+            <div>
+                <div class="circle1">
+
+                </div>
+                <div class="circle2">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
