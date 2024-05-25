@@ -1,0 +1,204 @@
+:root {
+    --background-color: #f6f8fd;
+    --header-background-color: #fd8978;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* font-family: Arial, sans-serif; */
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: cursive;
+    overflow-x: hidden;
+    /* font-family: 'danfo', sans-serif; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    /* padding: 10px; */
+
+}
+
+header .headdiv {
+    display: grid;
+    grid-template-columns: 300px auto 300px;
+}
+
+header .headdiv .headlogo {
+    width: 100%;
+    padding: 20px;
+}
+
+header .headdiv .headlogo img {
+    width: 100%;
+}
+
+
+header .navbar li {
+    display: table-cell;
+    position: relative;
+    padding: 15px 0;
+}
+
+header .navbar a {
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+}
+
+header .navbar a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: black;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+
+}
+
+header .navbar a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+header .options {
+    display: flex;
+    align-items: center;
+    /* Vertically center */
+}
+
+header .options div {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--header-background-color);
+    width: fit-content;
+    display: inline-block;
+    color: #f6f8fd;
+}
+
+header .options div:first-child {
+    margin-right: 10px;
+    /* Add specific CSS for the first div */
+    background-color: var(--background-color);
+    color: black;
+}
+
+.main_body .first , .second{
+    display: grid;
+    grid-template-columns: 55% auto;
+    align-items: center;
+    /* Center vertically */
+    justify-items: center;
+    /* Center horizontally */
+    font-size: 50px;
+
+}
+
+
+
+
+
+.main_body .first>div:first-child {
+    width: 100%;
+    
+    text-align: center;
+    /* justify-items: center; */
+    /* Center text horizontally within the div */
+}
+
+/* .main_body .first>div:first-child div{
+    width: 50%;
+    font-size: 50px;
+    text-align: center;
+    /* Center text horizontally within the div 
+} */
+
+.main_body .first>div:last-child {
+    /* background-color: #fd8978; */
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    /* width: 100%;
+    font-size: 50px;
+    text-align: center; */
+    /* Center text horizontally within the div */
+}
+
+.main_body .first>div:last-child .circle {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.main_body .first>div:last-child .circle1 {
+    /* background-color: red; */
+    background: linear-gradient(to bottom, #535fec, #acd4ff);
+}
+
+.main_body .first>div:last-child .circle2 {
+    width: 500px;
+    height: 500px;
+    /* background-color: yellow; */
+    background: linear-gradient(to bottom, #535fec, #fda060);
+}
+
+.over-object {
+    position: absolute;
+    
+    top: 12rem;
+    margin-left: -50px;
+    /* margin: 0px; */
+    z-index: 1;
+}
+
+.laptop {
+    width: 700px;
+    /* Adjust width as needed */
+    height: 600px;
+    /* Adjust height as needed */
+    background-image: url('../static/flap2.png');
+    /* background-image: url('{{ url_for("static", filename="flap2.png") }}'); */
+
+    /* background-color: aqua; */
+    /* Set the background image */
+    background-size: cover;
+    /* Ensure the image covers the entire div */
+    background-position: center;
+    transition: transform 0.5s ease;
+    /* Center the image within the div */
+}
+
+.main_body .second{
+    background-color: #1c0845;
+    background: linear-gradient(to bottom, var(--background-color), #535fec , #1c0845);
+    /* height: 1000px; */
+    padding: 0px;
+    
+}
+.main_body .second .second_laptop{
+    width: 950px;
+    height: 950px;
+    background-image: url('../static/flap3.png');
+    /* background-image: url('{{ url_for("static", filename="flap3.jpg") }}'); */
+    background-size: cover;
+    /* Ensure the image covers the entire div */
+    background-position: center;
+    transition: transform 0.5s ease;
+    margin-left: 900px;
+}
