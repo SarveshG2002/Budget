@@ -41,7 +41,7 @@
                 <div>
                     Personal Account Management System
                 </div>
-                
+
                 <div style="font-size: 20px;width: 100%;padding: 2% 25%;">
                     Our Personal Account Management System is designed to help you take control of your finances.
                     Whether you want to track your spending, manage your savings, or set financial goals, our system
@@ -68,7 +68,7 @@
 
             <div style="color: aliceblue;">
                 <div>
-                    Features include:
+                    <li>Features include:</li>
                 </div>
                 <ul>
                     <li>Comprehensive expense tracking</li>
@@ -83,6 +83,10 @@
 
                 </div>
             </div>
+        </div>
+
+        <div class="" style="width: 100%;height: 1000px;">
+
         </div>
 
     </div>
@@ -106,22 +110,52 @@
             // circle1.style.transform = 'rotate(' + rotation + 'deg)';
             // circle2.style.transform = 'rotate(' + rotation + 'deg)';
 
+            // Second laptop margin animation
+            // var secondLaptop = document.querySelector('.second_laptop');
+            // var maxScroll = document.body.scrollHeight - window.innerHeight;
+            // var scrollFraction = scrollTop / maxScroll;
+            // var initialMargin = 900;
+            // var newMargin = initialMargin - (initialMargin * scrollFraction);
+            // secondLaptop.style.marginLeft = newMargin + 'px';
 
+            // var featureItems = document.querySelectorAll('.main_body .second > div:first-child li');
+            // var initialMarginFeature = -1550;
+            // featureItems.forEach(function (item) {
+            //     var newMarginFeature = initialMarginFeature * (1 - scrollFraction);
+            //     item.style.marginLeft = newMarginFeature + 'px';
+            // });
+
+
+            // For Second Laptop Margin Animation
             var secondLaptop = document.querySelector('.second_laptop');
-            var scrollPosition = window.scrollY;
-            var screenWidth = window.innerWidth;
-            var laptopWidth = secondLaptop.offsetWidth;
-            var maxRightPosition = screenWidth - laptopWidth;
-            var newPosition = (scrollPosition / (document.body.clientHeight - window.innerHeight)) * maxRightPosition;
-            secondLaptop.style.right = newPosition + 'px';
-
-
-            var secondLaptop = document.querySelector('.second_laptop');
-            var maxScroll = document.body.scrollHeight - window.innerHeight;
+            var initialMarginLaptop = 900;
+            var secondSection = document.querySelector('.second');
+            var maxScroll = secondSection.offsetTop + secondSection.offsetHeight - window.innerHeight;
             var scrollFraction = scrollTop / maxScroll;
-            var initialMargin = 900;
-            var newMargin = initialMargin - (initialMargin * scrollFraction);
-            secondLaptop.style.marginLeft = newMargin + 'px';
+
+            console.log(scrollFraction);
+            var newMarginLaptop = initialMarginLaptop * (1 - scrollFraction);
+            if(newMarginLaptop<0){
+                newMarginLaptop="0";
+            }
+            secondLaptop.style.marginLeft = newMarginLaptop + 'px';
+
+            // For Features List Items Margin Animation
+            var featureItems = document.querySelectorAll('.main_body .second > div:first-child li');
+            var initialMarginFeature = -1550;
+            featureItems.forEach(function (item) {
+                // 
+                    var newMarginFeature = initialMarginFeature * (1 - scrollFraction);
+                    
+                    if(newMarginFeature>0){
+                        newMarginFeature = "0";
+                    }
+                    item.style.marginLeft = newMarginFeature + 'px';
+                    
+                // }
+                
+            });
+
         });
     </script>
 
