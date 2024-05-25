@@ -21,6 +21,7 @@
             /* font-family: Arial, sans-serif; */
             /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
             font-family: cursive;
+            overflow-x: hidden;
             /* font-family: 'danfo', sans-serif; */
         }
 
@@ -175,8 +176,8 @@
             /* Adjust width as needed */
             height: 600px;
             /* Adjust height as needed */
-            /* background-image: url('../static/flap2.png'); */
-            background-image: url('{{ url_for("static", filename="flap2.png") }}');
+            background-image: url('../static/flap2.png');
+            /* background-image: url('{{ url_for("static", filename="flap2.png") }}'); */
 
             /* background-color: aqua; */
             /* Set the background image */
@@ -195,13 +196,13 @@
         .main_body .second .second_laptop{
             width: 950px;
             height: 950px;
-            /* background-image: url('../static/FREE\ Isometric\ Laptop\ Illustration.jpg'); */
-            background-image: url('{{ url_for("static", filename="flap3.jpg") }}');
+            background-image: url('../static/flap3.jpg');
+            /* background-image: url('{{ url_for("static", filename="flap3.jpg") }}'); */
             background-size: cover;
             /* Ensure the image covers the entire div */
             background-position: center;
             transition: transform 0.5s ease;
-            /* margin-left: 100px; */
+            margin-left: 900px;
         }
     </style>
 </head>
@@ -210,8 +211,8 @@
     <header>
         <div class="headdiv">
             <div class="headlogo">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
-                <!-- <img src="../static/logo.png" alt="Budget"> -->
+                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
+                <img src="../static/logo.png" alt="Budget">
             </div>
             <div class="navbar">
                 <ul>
@@ -292,6 +293,14 @@
             var maxRightPosition = screenWidth - laptopWidth;
             var newPosition = (scrollPosition / (document.body.clientHeight - window.innerHeight)) * maxRightPosition;
             secondLaptop.style.right = newPosition + 'px';
+
+
+            var secondLaptop = document.querySelector('.second_laptop');
+            var maxScroll = document.body.scrollHeight - window.innerHeight;
+            var scrollFraction = scrollTop / maxScroll;
+            var initialMargin = 900;
+            var newMargin = initialMargin - (initialMargin * scrollFraction);
+            secondLaptop.style.marginLeft = newMargin + 'px';
         });
         </script>
 
