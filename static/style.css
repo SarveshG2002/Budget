@@ -183,6 +183,12 @@ header .options div:first-child {
     background-position: center;
     transition: transform 0.5s ease;
     /* Center the image within the div */
+
+    
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 .main_body .second{
@@ -207,4 +213,12 @@ header .options div:first-child {
     background-position: center;
     transition: transform 0.5s ease;
     margin-left: 900px;
+
 }
+
+
+/* @keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 20px); }
+    100%   { transform: translate(0, -0px); }    
+} */

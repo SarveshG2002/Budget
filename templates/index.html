@@ -42,10 +42,8 @@
                     Personal Account Management System
                 </div>
 
-                <div style="font-size: 20px;width: 100%;padding: 2% 25%;">
-                    Our Personal Account Management System is designed to help you take control of your finances.
-                    Whether you want to track your spending, manage your savings, or set financial goals, our system
-                    provides all the tools you need in one place.
+                <div style="font-size: 20px;width: 100%;padding: 2% 25%;" id="detail1">
+                    
                 </div>
 
             </div>
@@ -85,13 +83,27 @@
             </div>
         </div>
 
-        <div class="" style="width: 100%;height: 1000px;">
+        <!-- <div class="" style="width: 100%;height: 1000px;">
 
-        </div>
+        </div> -->
 
     </div>
 
     <script>
+        var i = 0;
+        var txt = `Our Personal Account Management System is designed to help you take control of your finances.
+                    Whether you want to track your spending, manage your savings, or set financial goals, our system
+                    provides all the tools you need in one place.`;
+        var typeSpeed = 25;
+
+        function addTypewriter(){
+            if (i < txt.length) {
+                document.getElementById("detail1").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(addTypewriter, typeSpeed);
+            }
+        }
+        addTypewriter();
         document.addEventListener('scroll', function () {
 
             // For Laptop Rotation
@@ -107,24 +119,6 @@
             var scaleFactor = 1 + (scrollTop / 2000); // Adjust the factor as needed
             circle1.style.transform = 'scale(' + scaleFactor + ')';
             circle2.style.transform = 'scale(' + scaleFactor + ')';
-            // circle1.style.transform = 'rotate(' + rotation + 'deg)';
-            // circle2.style.transform = 'rotate(' + rotation + 'deg)';
-
-            // Second laptop margin animation
-            // var secondLaptop = document.querySelector('.second_laptop');
-            // var maxScroll = document.body.scrollHeight - window.innerHeight;
-            // var scrollFraction = scrollTop / maxScroll;
-            // var initialMargin = 900;
-            // var newMargin = initialMargin - (initialMargin * scrollFraction);
-            // secondLaptop.style.marginLeft = newMargin + 'px';
-
-            // var featureItems = document.querySelectorAll('.main_body .second > div:first-child li');
-            // var initialMarginFeature = -1550;
-            // featureItems.forEach(function (item) {
-            //     var newMarginFeature = initialMarginFeature * (1 - scrollFraction);
-            //     item.style.marginLeft = newMarginFeature + 'px';
-            // });
-
 
             // For Second Laptop Margin Animation
             var secondLaptop = document.querySelector('.second_laptop');
@@ -133,7 +127,7 @@
             var maxScroll = secondSection.offsetTop + secondSection.offsetHeight - window.innerHeight;
             var scrollFraction = scrollTop / maxScroll;
 
-            console.log(scrollFraction);
+            // console.log(scrollFraction);
             var newMarginLaptop = initialMarginLaptop * (1 - scrollFraction);
             if(newMarginLaptop<0){
                 newMarginLaptop="0";
