@@ -173,7 +173,7 @@ header .options div:first-child {
     /* Adjust width as needed */
     height: 600px;
     /* Adjust height as needed */
-    background-image: url('../static/flap2.png');
+    background-image: url('flap2.png');
     /* background-image: url('{{ url_for("static", filename="flap2.png") }}'); */
 
     /* background-color: aqua; */
@@ -206,8 +206,8 @@ header .options div:first-child {
 .main_body .second .second_laptop{
     width: 950px;
     height: 950px;
-    background-image: url('../static/flap3.png');
-    /* background-image: url('{{ url_for("static", filename="flap3.jpg") }}'); */
+    /* background-image: url('../static/flap3.png'); */
+    background-image: url("flap3.png");
     background-size: cover;
     /* Ensure the image covers the entire div */
     background-position: center;

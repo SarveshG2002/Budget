@@ -5,6 +5,7 @@ from decorators import login_required  # Import the login_required decorator
 from sqlalchemy import func,text
 from datetime import date,datetime,timedelta
 import random
+import re
 
 
 
@@ -34,6 +35,42 @@ def login():
     else:
         # Render the login page
         return render_template('login.html')
+    
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        
+        # Email validation regex
+        email_regex = r'^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        
+        # Check if the email is valid
+        if not re.match(email_regex, email):
+            # flash('Invalid email address.', 'error')
+            session['error'] = 'Invalid email address.'
+            return redirect(url_for('signup'))
+        
+        # Check if the email is already in use
+        if Users.query.filter_by(username=email).first():
+            # flash('Email already in use.', 'error')
+            session['error'] = 'Email already in use.'
+            return redirect(url_for('signup'))
+        
+        # Create a new user and add to the database
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        new_user = Users(username=email, password=password,created_at=formatted_datetime)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        # flash('Signup successful! Please log in.', 'success')
+        session['success'] = "Signup successful! Please log in."
+        return redirect(url_for('login'))
+    else:
+        return render_template('signup.html')
+
+
 
 @app.route('/dashboard')
 @login_required
