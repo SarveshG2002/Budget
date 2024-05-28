@@ -1,0 +1,99 @@
+:root {
+    --background-color: #f6f8fd;
+    --header-background-color: #fd8978;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* font-family: Arial, sans-serif; */
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: cursive;
+    overflow-x: hidden;
+    /* font-family: 'danfo', sans-serif; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    /* padding: 10px; */
+
+}
+
+header .headdiv {
+    display: grid;
+    grid-template-columns: 300px auto 300px;
+}
+
+header .headdiv .headlogo {
+    width: 100%;
+    padding: 20px;
+}
+
+header .headdiv .headlogo img {
+    width: 100%;
+}
+
+
+header .navbar li {
+    display: table-cell;
+    position: relative;
+    padding: 15px 0;
+}
+
+header .navbar a {
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+}
+
+header .navbar a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: black;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+
+}
+
+header .navbar a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+header .options {
+    display: flex;
+    align-items: center;
+    /* Vertically center */
+}
+
+header .options div {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--header-background-color);
+    width: fit-content;
+    display: inline-block;
+    color: #f6f8fd;
+}
+
+header .options div:first-child {
+    margin-right: 10px;
+    /* Add specific CSS for the first div */
+    background-color: var(--background-color);
+    color: black;
+}

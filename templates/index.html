@@ -8,16 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
     <header>
         <div class="headdiv">
             <div class="headlogo">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
-                <!-- <img src="../static/logo.png" alt="Budget"> -->
+                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
+                <img src="../static/logo.png" alt="Budget">
             </div>
             <div class="navbar">
                 <ul>
@@ -28,9 +28,11 @@
             </div>
             <div class="options">
                 <div>
-                    <a href="{{ url_for('login') }}">Sign in</a>
+                    <!-- <a href="{{ url_for('login') }}">Sign in</a> -->
+                    <a href="">Sign in</a>
                 </div>
                 <div>
+                    <!-- <a href="{{ url_for('signup') }}">Sign up</a> -->
                     <a href="{{ url_for('signup') }}">Sign up</a>
                 </div>
             </div>
