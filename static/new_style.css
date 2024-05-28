@@ -126,3 +126,41 @@ header .options div:first-child {
     font-size: 25px;
     margin: 0 auto; /* This will center the element horizontally */
   }
+
+
+  .main .outer-container {
+    font-family: "Roboto Mono", monospace;
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: center; /* Horizontally center the inner divs */
+    align-items: center;     /* Center the inner divs */
+    /* height: 100vh;  Optional: to center vertically within the viewport */
+}
+
+.main .outer-container .button {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--header-background-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: var(--background-color);
+    font-weight: bold;
+    margin-bottom: 10px; /* Add some space between the button and the last div */
+}
+
+.main .outer-container div:last-child {
+    text-align: center; /* Center align text in the last div */
+}
+
+
+.main .outer-container .button:hover {
+    /* display: inline-block;
+    width: fit-content;
+    height: fit-content; */
+    background-color: var(--header-background-color);
+    padding: 12px 22px;
+    border-radius: 5px;
+    color: var(--background-color);
+    font-weight: bold;
+}
