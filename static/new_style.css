@@ -97,3 +97,32 @@ header .options div:first-child {
     background-color: var(--background-color);
     color: black;
 }
+
+
+.main .Heading{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    font-size: 50px;
+    padding: 20px;
+    
+}
+
+.dotted-underline {
+    border-bottom: 5px dashed green;
+    padding-bottom: 2px;
+}
+
+.main .description {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align-last: center;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: "Roboto Mono", monospace;
+    font-size: 25px;
+    margin: 0 auto; /* This will center the element horizontally */
+  }
