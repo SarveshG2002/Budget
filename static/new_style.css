@@ -166,24 +166,39 @@ header .options div:first-child {
     font-weight: bold;
 }
 
-.main .showcase {
+.main .showcaseDiv .showcase {
     width: 100%;
     height: fit-content;
     display: flex;
     justify-content: center; /* Centers the image horizontally */
     align-items: center; /* Centers the image vertically */
-    padding: 50px 0px 0px 0px;
+    /* padding: 50px 0px 0px 0px; */
+    
+    margin-top: 50px;
+}
+
+.main .showcaseDiv .show_first{
     background-image: url(./shape1.png);
     background-repeat: no-repeat;
     background-size: cover;
-    /* Ensure the image covers the entire div */
     background-position: center;
 }
-.main .showcase .img {
+
+
+.main .show_first .img {
     width: 80%;
     
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.main .showcase img{
+.main .show_first img{
     border-radius: 10px;
+}
+
+
+.main .showcaseDiv .show_second{
+    flex-direction: column;
+    background-image: url(./shape2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
