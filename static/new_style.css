@@ -220,18 +220,21 @@ header .options div:first-child {
 }
 
 .main .showcaseDiv .show_second{
+    padding: 20px;
     margin-top: 50px;
     display: flex;
+    height: 500px;
     justify-content: space-between; 
+    background-image: url(./shape5.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .showcase.show_second .img {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(./shape4.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    
 }
 
 .showcase.show_second .img img {
