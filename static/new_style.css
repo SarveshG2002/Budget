@@ -166,14 +166,12 @@ header .options div:first-child {
     font-weight: bold;
 }
 
-.main .showcaseDiv .showcase {
+/* .main .showcaseDiv .showcase {
     width: 100%;
     height: fit-content;
     display: flex;
-    justify-content: center; /* Centers the image horizontally */
-    align-items: center; /* Centers the image vertically */
-    /* padding: 50px 0px 0px 0px; */
-    
+    justify-content: center; 
+    align-items: center; 
     margin-top: 50px;
 }
 
@@ -201,4 +199,50 @@ header .options div:first-child {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+} */
+
+.main .showcaseDiv .show_first{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 50px;
+    background-image: url(./shape1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
+
+.main .showcaseDiv .show_first .img{
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main .showcaseDiv .show_second{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between; 
+}
+.showcase.show_second .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./shape4.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.showcase.show_second .img img {
+    width: 70%;
+}
+
+/* .main .showcaseDiv .show_second img{
+    width: 70%;
+} */
+
+
+
+
+
