@@ -222,28 +222,29 @@ header .options div:first-child {
 .main .showcaseDiv .show_second{
     padding: 20px;
     margin-top: 50px;
-    display: flex;
-    height: 500px;
-    justify-content: space-between; 
+    display: grid;
+    grid-template-columns: 50% auto;
     background-image: url(./shape5.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-.showcase.show_second .img {
+
+.main .showcaseDiv .show_second .img{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
-.showcase.show_second .img img {
-    width: 70%;
+.main .showcaseDiv .show_second .img img{
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
 }
 
-/* .main .showcaseDiv .show_second img{
-    width: 70%;
-} */
+
+
 
 
 
