@@ -240,7 +240,19 @@ header .options div:first-child {
     width: 30%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+}
 
+.main .showcaseDiv .show_second .text .Heading span{
+    color: #fd8978;
+    padding: 67px;
+    background-image: url(/static/round2.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.main .showcaseDiv .show_second .text .description1{
+    width: 100%;
 }
 
 
