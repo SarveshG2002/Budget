@@ -167,40 +167,6 @@ header .options div:first-child {
     font-weight: bold;
 }
 
-/* .main .showcaseDiv .showcase {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin-top: 50px;
-}
-
-.main .showcaseDiv .show_first{
-    background-image: url(./shape1.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-
-.main .show_first .img {
-    width: 80%;
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.main .show_first img{
-    border-radius: 10px;
-}
-
-
-.main .showcaseDiv .show_second{
-    flex-direction: column;
-    background-image: url(./shape2.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-} */
 
 .main .showcaseDiv .show_first{
     width: 100%;
@@ -262,7 +228,7 @@ header .options div:first-child {
 
 .main .showcaseDiv .show_third .Steps {
     padding: 20px 5%;
-    margin: 5vh auto 0vh auto;
+    margin: 2vh auto 0vh auto;
     width: 70%;
     background-color: var(--gray);
     border-radius: 15px 50px;
@@ -270,18 +236,58 @@ header .options div:first-child {
     justify-content: space-between;
     align-items: center;
     position: relative; /* Ensure proper positioning for pseudo-element */
+    text-align: center;
+}
+
+.main .showcaseDiv .show_third .Steps > * {
+    flex-grow: 1; /* Make all child elements equally expand */
+    flex-basis: 0; /* Ensure equal width */
+    margin: 0 10px; /* Adjust margin as needed */
 }
 
 
-.main .showcaseDiv .show_third .step{
+.main .showcaseDiv .show_third .step {
+    padding: 10px;
+    color: #e2e2e2;
     width: 100px;
     height: 100px;
-    background-image: url(/static/plus.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    /* box-shadow: inset; */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+}
+
+
+.main .showcaseDiv .show_third .step1 .step{
+    background-image: url(/static/plus.png);
+}
+
+.main .showcaseDiv .show_third .step2 .step{
+    background-image: url(/static/bank.png);
+}
+.main .showcaseDiv .show_third .step3 .step{
+    background-image: url(/static/salary.png);
+}
+.main .showcaseDiv .show_third .step4 .step{
+    background-image: url(/static/poor.png);
+}
+.main .showcaseDiv .show_third .step5 .step{
+    background-image: url(/static/project-management.png);
+}
+
+
+
+.main .stepHEad{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    font-size: 30px;
+    padding: 20px;
+    
 }
 
 
