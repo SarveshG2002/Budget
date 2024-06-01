@@ -307,6 +307,21 @@ header .options div:first-child {
     /* margin-top: 10vh; */
     width: fit-content;
     padding: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.main .showcaseDiv .show_fourth .Heading .step1{
+    background-image: url(/static/underline1.png);
+}
+
+.main .showcaseDiv .show_fourth .Heading .step2{
+    background-image: url(/static/underline2.png);
+}
+
+.main .showcaseDiv .show_fourth .Heading .step3{
+    background-image: url(/static/underline3.png);
 }
 
 
