@@ -121,7 +121,7 @@ header .options div:first-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align-last: center;
+    text-align: center;
     /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     font-family: "Roboto Mono", monospace;
     font-size: 25px;
@@ -130,6 +130,7 @@ header .options div:first-child {
 
 
   .main .outer-container {
+    height: 100px;
     font-family: "Roboto Mono", monospace;
     display: flex;
     flex-direction: column; /* Arrange items in a column */
@@ -296,6 +297,18 @@ header .options div:first-child {
     padding: 20px;
     
 }
+
+
+.main .showcaseDiv .show_fourth{
+    margin-top: 10vh;
+}
+
+.main .showcaseDiv .show_fourth .Heading .step{
+    /* margin-top: 10vh; */
+    width: fit-content;
+    padding: 20px;
+}
+
 
 
 
