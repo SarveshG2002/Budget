@@ -277,6 +277,13 @@ header .options div:first-child {
     background-image: url(/static/project-management.png);
 }
 
+.main .showcaseDiv .show_third .Step{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 .main .stepHEad{
