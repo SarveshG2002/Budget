@@ -308,8 +308,8 @@ header .options div:first-child {
     width: fit-content;
     padding: 20px;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: bottom center;
 }
 
 .main .showcaseDiv .show_fourth .Heading .step1{
@@ -317,11 +317,33 @@ header .options div:first-child {
 }
 
 .main .showcaseDiv .show_fourth .Heading .step2{
-    background-image: url(/static/underline2.png);
+    /* background-image: url(/static/underline3.png); */
+    /* padding: 0px; */
+    background-image: url(/static/red_highlight_02.svg);
+    
 }
 
 .main .showcaseDiv .show_fourth .Heading .step3{
     background-image: url(/static/underline3.png);
+}
+
+.main .showcaseDiv .show_fourth .text{
+    height: 35vh;
+    width: 100%;
+    background-image: url(/static/roundBack1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main .showcaseDiv .show_fourth .text img{
+    /* height: 10vh; */
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 
