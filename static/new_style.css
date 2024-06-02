@@ -352,12 +352,32 @@ header .options div:first-child {
 }
 
 footer{
+    display: flex;
+    justify-content: center;
     width: 100%;
-    padding: 10px;
-    height: 40vh;
+    padding: 50px;
+    height: 30vh;
     box-sizing: border-box;
     background-color: #240c4d;
+}
+
+footer .footer_container{
+    width: 70%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    color: #e2e2e2;
+}
+
+footer div a{
+    text-decoration: none;
+    color: #e2e2e2;
+}
+
+
+footer .line .headlogo img{
+    width: 50%;
 }
 
 
