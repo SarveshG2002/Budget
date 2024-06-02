@@ -1,7 +1,9 @@
 :root {
     --background-color: #f6f8fd;
-    --header-background-color: #fd8978;
+    --header-background-color: #673ab7;
     --gray: #e2e2e2;
+    --black: black;
+    --green: green;
 }
 
 body {
@@ -9,11 +11,8 @@ body {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    /* font-family: Arial, sans-serif; */
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-    font-family: cursive;
+    font-family: poppins;
     overflow-x: hidden;
-    /* font-family: 'danfo', sans-serif; */
 }
 
 * {
@@ -48,7 +47,7 @@ header .navbar li {
 }
 
 header .navbar a {
-    color: black;
+    color: var(--black);
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.15em;
@@ -66,7 +65,7 @@ header .navbar a:after {
     height: 2px;
     left: 50%;
     position: absolute;
-    background: black;
+    background: var(--black);
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
 
@@ -89,14 +88,14 @@ header .options div {
     background-color: var(--header-background-color);
     width: fit-content;
     display: inline-block;
-    color: #f6f8fd;
+    color: var(--background-color);
 }
 
 header .options div:first-child {
     margin-right: 10px;
     /* Add specific CSS for the first div */
     background-color: var(--background-color);
-    color: black;
+    color: var(--black);
 }
 
 
@@ -113,7 +112,7 @@ header .options div:first-child {
 }
 
 .dotted-underline {
-    border-bottom: 5px dashed green;
+    border-bottom: 5px dashed var(--green);
     padding-bottom: 2px;
 }
 
@@ -123,7 +122,6 @@ header .options div:first-child {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     font-family: "Roboto Mono", monospace;
     font-size: 25px;
     margin: 0 auto; /* This will center the element horizontally */
@@ -212,7 +210,7 @@ header .options div:first-child {
 }
 
 .main .showcaseDiv .show_second .text .Heading span{
-    color: #fd8978;
+    color: var(--header-background-color);
     padding: 67px;
     background-image: url(/static/round2.gif);
     background-repeat: no-repeat;
@@ -250,7 +248,7 @@ header .options div:first-child {
 
 .main .showcaseDiv .show_third .step {
     padding: 10px;
-    color: #e2e2e2;
+    /* color: #000000; */
     width: 100px;
     height: 100px;
     background-repeat: no-repeat;
@@ -356,7 +354,7 @@ footer{
     justify-content: center;
     width: 100%;
     padding: 50px;
-    height: 30vh;
+    height: 35vh;
     box-sizing: border-box;
     background-color: #240c4d;
 }
@@ -367,18 +365,27 @@ footer .footer_container{
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-start;
-    color: #e2e2e2;
+    color: var(--background-color);
+}
+
+footer .desc{
+    max-width: 400px;
 }
 
 footer div a{
     text-decoration: none;
-    color: #e2e2e2;
+    color: var(--background-color);
 }
 
 
 footer .line .headlogo img{
     width: 50%;
 }
+
+footer .line .footDesc{
+    
+}
+
 
 
 
