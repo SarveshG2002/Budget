@@ -108,6 +108,7 @@ header .options div:first-child {
     font-style: italic;
     font-size: 50px;
     padding: 20px;
+    text-align: center;
     
 }
 
@@ -262,20 +263,20 @@ header .options div:first-child {
 
 
 .main .showcaseDiv .show_third .step1 .step{
-    background-image: url(/static/plus.png);
+    background-image: url(/static/icons8-add-48.png);
 }
 
 .main .showcaseDiv .show_third .step2 .step{
-    background-image: url(/static/bank.png);
+    background-image: url(/static/icons8-bank-building-48.png);
 }
 .main .showcaseDiv .show_third .step3 .step{
-    background-image: url(/static/salary.png);
+    background-image: url(/static/icons8-income-48.png);
 }
 .main .showcaseDiv .show_third .step4 .step{
-    background-image: url(/static/poor.png);
+    background-image: url(/static/icons8-low-price-48.png);
 }
 .main .showcaseDiv .show_third .step5 .step{
-    background-image: url(/static/project-management.png);
+    background-image: url(/static/icons8-report-48.png);
 }
 
 .main .showcaseDiv .show_third .Step{
@@ -345,6 +346,24 @@ header .options div:first-child {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
+
+.main .showcaseDiv .show_fifth{
+    /* margin-top: 5vh; */
+}
+
+footer{
+    width: 100%;
+    padding: 10px;
+    height: 40vh;
+    box-sizing: border-box;
+    background-color: #240c4d;
+    display: flex;
+}
+
+
+
+
+
 
 
 
