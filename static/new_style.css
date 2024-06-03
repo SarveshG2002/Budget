@@ -392,6 +392,9 @@ footer .line .footDesc{
 
 
 @media (max-width: 500px) {
+    header .headdiv .headlogo img{
+        width: 50%;
+    }
     header .headdiv .navbar{
         display: none;
     }
