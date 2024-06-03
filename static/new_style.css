@@ -197,6 +197,10 @@ header .options div:first-child {
     background-position: center;
 }
 
+.main .showcaseDiv .show_second_mobile{
+    display: none;
+}
+
 .main .showcaseDiv .show_second .img{
     display: flex;
     justify-content: center;
@@ -384,6 +388,58 @@ footer .line .headlogo img{
 
 footer .line .footDesc{
     
+}
+
+
+@media (max-width: 500px) {
+    header .headdiv .navbar{
+        display: none;
+    }
+    header .headdiv .options{
+        display: none;
+    }
+    .main .Heading{
+        font-size: 30px;
+        padding: 0px 15px;
+        text-align: start;
+    }
+    .main .description{
+        padding: 0px 15px;
+        font-size: 15px;
+        text-align: start;
+        width: 100%;
+    }
+    .main .showcaseDiv .show_second{
+        /* grid-template-columns: auto; */
+        display: none;
+    }
+
+    .main .showcaseDiv .show_second_mobile{
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+        /* text-align: center; */
+    }
+    .main .showcaseDiv .show_second_mobile .text .Heading{
+        display: flex;
+        text-align: center;
+    }
+
+    .main .showcaseDiv .show_second_mobile .img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .main .showcaseDiv .show_second_mobile img{
+        width: 50%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    
+
 }
 
 
