@@ -91,6 +91,10 @@ header .options div {
     color: var(--background-color);
 }
 
+header .headdiv .menu{
+    display: none;
+}
+
 header .options div:first-child {
     margin-right: 10px;
     /* Add specific CSS for the first div */
@@ -400,6 +404,18 @@ footer .line .footDesc{
     }
     header .headdiv .options{
         display: none;
+    }
+    
+
+    header .headdiv .menu{
+        display: flex;
+    }
+    header .headdiv .menu img{
+        /* display: flex; */
+        /* width: 100%; */
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
     }
     .main .Heading{
         font-size: 30px;
