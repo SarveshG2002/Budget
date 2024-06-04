@@ -102,6 +102,10 @@ header .options div:first-child {
     color: var(--black);
 }
 
+aside{
+    display: none;
+}
+
 
 .main .Heading{
     width: 100%;
@@ -417,6 +421,49 @@ footer .line .footDesc{
         height: 50px;
         margin-top: 10px;
     }
+
+    aside{
+        position: fixed;
+        /* Fix the navbar at the top */
+        top: 0;
+        /* Set distance from the top of the viewport */
+        width: 100%;
+        /* Occupy full width of the viewport */
+        z-index: 1;
+        display: flex;
+        direction: rtl;
+        
+        background-color: var(--gray);
+        height: 100vh;
+    }
+
+    aside .sidebar{
+        width: 70%;
+        background-color: var(--header-background-color);
+    }
+
+    aside .sidebar .img{
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 80% 20%;
+        direction: ltr;
+    }
+
+    aside .sidebar .img img:first-child{
+        /* width: 50px;
+        height: 50px; */
+        width: 80%;
+        padding: 10px;
+    }
+    aside .sidebar .img img:last-child{
+        /* width: 100px;
+        height: 25px; */
+        width: 50%;
+
+    }
+
     .main .Heading{
         font-size: 30px;
         padding: 0px 15px;
