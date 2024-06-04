@@ -433,8 +433,10 @@ footer .line .footDesc{
         display: flex;
         direction: rtl;
         
-        background-color: var(--gray);
+        /* background-color: var(--gray); */
         height: 100vh;
+        color: var(--background-color);
+        
     }
 
     aside .sidebar{
@@ -460,8 +462,26 @@ footer .line .footDesc{
     aside .sidebar .img img:last-child{
         /* width: 100px;
         height: 25px; */
-        width: 50%;
+        width: 60%;
+        margin-top: 10px;
+        background-color: var(--background-color);
+        border-radius: 50%;
+        padding: 5px;
 
+    }
+
+    aside .sidebar .menuBar{
+        display: flex;
+        flex-direction: column;
+        direction: ltr;
+        
+        /* padding-bottom: 20px; */
+    }
+
+    aside .sidebar .menuBar a{
+        text-decoration: none;
+        padding: 0px 0px 20px 20px;
+        color: var(--background-color);
     }
 
     .main .Heading{
