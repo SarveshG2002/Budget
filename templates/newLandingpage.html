@@ -8,16 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
-    <link rel="stylesheet" href="../static/new_style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='new_style.css') }}">
+    <!-- <link rel="stylesheet" href="../static/new_style.css"> -->
 </head>
 
 <body>
     <header>
         <div class="headdiv">
             <div class="headlogo">
-                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
-                <img src="../static/logo.png" alt="Budget">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
+                <!-- <img src="../static/logo.png" alt="Budget"> -->
             </div>
             <div class="navbar">
                 <ul>
@@ -28,16 +28,17 @@
             </div>
             <div class="options">
                 <div>
-                    <!-- <a href="{{ url_for('login') }}">Sign in</a> -->
-                    <a href="">Login</a>
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <!-- <a href="">Login</a> -->
                 </div>
                 <div>
-                    <!-- <a href="{{ url_for('signup') }}">Sign up</a> -->
-                    <a href="" style="color: var(--background-color);text-decoration: none;">Sign up</a>
+                    <a href="{{ url_for('signup') }}" style="color: var(--background-color);text-decoration: none;">Sign up</a>
+                    <!-- <a href="" >Sign up</a> -->
                 </div>
             </div>
             <div class="menu" onclick="ToggleMenu()">
-                <img src="../static/icons8-menu-64.png" alt="">
+                <img src="{{ url_for('static', filename='icons8-menu-64.png') }}" alt="">
+                <!-- <img src="../static/icons8-menu-64.png" alt=""> -->
             </div>
         </div>
     </header>
@@ -48,7 +49,8 @@
             <div class="img">
                 
                 <img src="" alt="">
-                <img src="../static/icons8-close-64.png" alt="" onclick="ToggleMenu()">
+                <img src="{{ url_for('static', filename='icons8-close-64.png') }}" alt="" onclick="ToggleMenu()">
+                <!-- <img src="../static/icons8-close-64.png" alt="" onclick="ToggleMenu()"> -->
                 
                 
             </div>

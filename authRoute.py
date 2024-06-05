@@ -192,7 +192,7 @@ def logout():
 @app.route('/')
 def index():
     # return redirect(url_for('login'))
-    return render_template("index.html")
+    return render_template("newLandingpage.html")
 
 @app.route('/register')
 def register():
