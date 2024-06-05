@@ -430,7 +430,7 @@ footer .line .footDesc{
         width: 100%;
         /* Occupy full width of the viewport */
         z-index: 1;
-        display: flex;
+        /* display: flex; */
         direction: rtl;
         
         /* background-color: var(--gray); */
@@ -442,6 +442,10 @@ footer .line .footDesc{
     aside .sidebar{
         width: 70%;
         background-color: var(--header-background-color);
+    }
+
+    aside .remaining{
+        width: 30%;
     }
 
     aside .sidebar .img{
@@ -482,6 +486,20 @@ footer .line .footDesc{
         text-decoration: none;
         padding: 0px 0px 20px 20px;
         color: var(--background-color);
+    }
+    aside .sidebar .buttons{
+        direction: ltr;
+        display: flex;
+        /* justify-content: space-around; */
+        flex-direction: column;
+    }
+    aside .sidebar .buttons a{
+        background-color: var(--background-color);
+        padding: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        width: fit-content;
+        margin: 10px;
     }
 
     .main .Heading{
