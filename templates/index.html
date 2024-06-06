@@ -1,164 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap"
-        rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-
-<body>
-    <header>
-        <div class="headdiv">
-            <div class="headlogo">
-                <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
-                <img src="../static/logo.png" alt="Budget">
-            </div>
-            <div class="navbar">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="options">
-                <div>
-                    <!-- <a href="{{ url_for('login') }}">Sign in</a> -->
-                    <a href="">Sign in</a>
-                </div>
-                <div>
-                    <!-- <a href="{{ url_for('signup') }}">Sign up</a> -->
-                    <a href="{{ url_for('signup') }}">Sign up</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="main_body">
-        <div class="first">
-            <div>
-                <div>
-                    Personal Account Management System
-                </div>
-
-                <div style="font-size: 20px;width: 100%;padding: 2% 25%;" id="detail1">
-
-                </div>
-
-            </div>
-            <div>
-
-                <div class="circle1 circle">
-
-                </div>
-                <div class="circle2 circle">
-
-                </div>
-                <div class="over-object laptop">
-
-                </div>
-            </div>
-
-
-        </div>
-        <div class="second">
-
-            <div style="color: aliceblue;">
-                <div>
-                    <li>Features include:</li>
-                </div>
-                <ul>
-                    <li>Comprehensive expense tracking</li>
-                    <li>Customizable budget planning</li>
-                    <li>Financial goal setting and tracking</li>
-                    <li>Secure and private data management</li>
-                    <li>Real-time financial insights and reports</li>
-                </ul>
-            </div>
-            <div>
-                <div class="second_laptop">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="stars" style="background-color:black;height: 1000px;width:200%">
-
-            <div class=""></div>
-            <div class="twinkling"></div>
-        </div>
-
-    </div>
-
-    <script>
-        var i = 0;
-        var txt = `Our Personal Account Management System is designed to help you take control of your finances.
-                    Whether you want to track your spending, manage your savings, or set financial goals, our system
-                    provides all the tools you need in one place.`;
-        var typeSpeed = 25;
-
-        function addTypewriter() {
-            if (i < txt.length) {
-                document.getElementById("detail1").innerHTML += txt.charAt(i);
-                i++;
-                setTimeout(addTypewriter, typeSpeed);
-            }
+    <style>
+        :root {
+            --background-color: #f6f8fd;
+            --header-background-color: #673ab7;
+            --gray: #e2e2e2;
+            --black: black;
+            --green: green;
         }
-        addTypewriter();
-        document.addEventListener('scroll', function () {
+        body{
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box{
+            padding: 100px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(100, 100, 100, 0.1);
+            border-radius: 20px;
+            display: flex;
+        }
+        
 
-            // For Laptop Rotation
-            var laptop = document.querySelector('.laptop');
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            var rotation = scrollTop * -0.05; // Scale down the rotation
-            laptop.style.transform = 'rotate(' + rotation + 'deg)';
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="image">
 
-            // For Circle Scalling
-            var circle1 = document.querySelector('.circle1');
-            var circle2 = document.querySelector('.circle2');
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            var scaleFactor = 1 + (scrollTop / 2000); // Adjust the factor as needed
-            circle1.style.transform = 'scale(' + scaleFactor + ')';
-            circle2.style.transform = 'scale(' + scaleFactor + ')';
+        </div>
+        <div class="form">
+            <form action="">
 
-            // For Second Laptop Margin Animation
-            var secondLaptop = document.querySelector('.second_laptop');
-            var initialMarginLaptop = 900;
-            var secondSection = document.querySelector('.second');
-            var maxScroll = secondSection.offsetTop + secondSection.offsetHeight - window.innerHeight;
-            var scrollFraction = scrollTop / maxScroll;
-
-            // console.log(scrollFraction);
-            var newMarginLaptop = initialMarginLaptop * (1 - scrollFraction);
-            if (newMarginLaptop < 0) {
-                newMarginLaptop = "0";
-            }
-            secondLaptop.style.marginLeft = newMarginLaptop + 'px';
-
-            // For Features List Items Margin Animation
-            var featureItems = document.querySelectorAll('.main_body .second > div:first-child li');
-            var initialMarginFeature = -1550;
-            featureItems.forEach(function (item) {
-                // 
-                var newMarginFeature = initialMarginFeature * (1 - scrollFraction);
-
-                if (newMarginFeature > 0) {
-                    newMarginFeature = "0";
-                }
-                item.style.marginLeft = newMarginFeature + 'px';
-
-                // }
-
-            });
-
-        });
-    </script>
-
-
+            </form>
+        </div>
+        
+    </div>
 </body>
-
 </html>
