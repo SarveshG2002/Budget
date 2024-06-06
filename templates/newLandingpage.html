@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUDGET || Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='new_style.css') }}">
+    <!-- <link rel="stylesheet" href="../static/new_style.css"> -->
+</head>
+
+<body>
+    <header>
+        <div class="headdiv">
+            <div class="headlogo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget">
+                <!-- <img src="../static/logo.png" alt="Budget"> -->
+            </div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="options">
+                <div>
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <!-- <a href="">Login</a> -->
+                </div>
+                <div>
+                    <a href="{{ url_for('signup') }}" style="color: var(--background-color);text-decoration: none;">Sign up</a>
+                    <!-- <a href="" >Sign up</a> -->
+                </div>
+            </div>
+            <div class="menu" onclick="ToggleMenu()">
+                <img src="{{ url_for('static', filename='icons8-menu-64.png') }}" alt="">
+                <!-- <img src="../static/icons8-menu-64.png" alt=""> -->
+            </div>
+        </div>
+    </header>
+    
+
+    <aside id="aside">
+        <div class="sidebar">
+            <div class="img">
+                
+                <img src="" alt="">
+                <img src="{{ url_for('static', filename='icons8-close-64.png') }}" alt="" onclick="ToggleMenu()">
+                <!-- <img src="../static/icons8-close-64.png" alt="" onclick="ToggleMenu()"> -->
+                
+                
+            </div>
+            <div class="menuBar">
+                <a href="">Home</a>
+                <a href="">Portfolio</a>
+                <a href="">Blog</a>
+            </div>
+            <div class="buttons">
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('signup') }}">Sign UP</a>
+            </div>
+        </div>
+        <div class="remaining"  onclick="ToggleMenu()">hello</div>
+    </aside>
+
+    <div class="main">
+        <div class="Heading">
+            <p>Streamline Your <span class="dotted-underline" style="color: green;margin-left: 10px;">Spendings</span>.</p>
+        </div>
+        <div class="description">
+            <p>
+                <span style="font-weight: bold;">Budget</span> is designed to help you take control of your finances.
+                    Whether you want to track your spending, manage your savings, or set financial goals, our system
+                    provides all the tools you need in one place.
+            </p>
+        </div>
+        <div class="outer-container">
+            <a class="button" href="{{ url_for('signup') }}">
+                <!-- Your button content here -->
+                Start Now - It's free
+            </a>
+            <div>
+                Free, forever, with unlimited users. <span style="color: green;" data-toggle="tooltip" title="Open-source and free for everyone. Join us now!">See why</span>
+            </div>
+            
+        </div>
+
+        <div class="showcaseDiv">
+            <div class="showcase show_first">
+                <div class="img">
+                    <img src="../static/ss1.png" width="100%" alt="">
+                </div>
+            </div>
+
+
+            <div class="showcase show_second">
+                <div class="img">
+                    <img src="../static/ss2.gif" width="100%" alt="">
+                </div>
+                <div class="text">
+                    <div class="Heading" style="padding: 0px;color: green">
+                        Finances at Your<span>Fingertips</span>
+                    </div>
+                    <div class="description description1">
+                        <p>
+                            <span style="font-weight: bold;color: green;">Experience</span> the freedom to manage your expenses anytime, anywhere! Our beautifully responsive website lets you track spending, set budgets, and achieve your financial goals seamlessly from your mobile device. Enjoy effortless financial management on the go.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase show_second_mobile">
+                
+                <div class="text">
+                    <div class="Heading" style="padding: 0px;color: green">
+                        Finances at Your Fingertips
+                    </div>
+                    <div class="description description1">
+                        <p>
+                            <span style="font-weight: bold;color: green;">Experience</span> the freedom to manage your expenses anytime, anywhere! Our beautifully responsive website lets you track spending, set budgets, and achieve your financial goals seamlessly from your mobile device. Enjoy effortless financial management on the go.
+                        </p>
+                    </div>
+                </div>
+                <div class="img">
+                    <img src="../static/ss2.gif" width="100%" alt="">
+                </div>
+            </div>
+
+            <div class="showcase show_third">
+                <div class="Heading">
+                    Easy Steps to Get Started
+                </div>
+                <div class="description">
+                    Create your account and add your bank accounts to centralize your financial tracking. Organize your expenses by setting up categories, and effortlessly record your income and expenses. View your cashbook, expense list, and income list to gain a comprehensive overview of your finances and make informed decisions.                </div>
+                <div class="Steps">
+                    
+                    <div class="step1 Step">
+                        <div class="step">
+                        
+                        </div>
+                        <div class="stepHEad">
+                            Create Account
+                        </div>
+                        
+                    </div>
+                    <div class="step2 Step">
+                        <div class="step">
+                        
+                        </div>
+                        <div class="stepHEad">
+                            Create Bank Account 
+                        </div>
+                        
+                    </div>
+                    <div class="step3 Step">
+                        <div class="step">
+                        
+                        </div>
+                        <div class="stepHEad">
+                            Add Income
+                        </div>
+                    </div>
+                    <div class="step4 Step">
+                        <div class="step">
+                        
+                        </div>
+                        <div class="stepHEad">
+                            Add Expense
+                        </div>
+                    </div>
+                    <div class="step5 Step">
+                        <div class="step">
+                        
+                        </div>
+                        <div class="stepHEad">
+                            Monitor Your Spendings
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="showcase show_fourth">
+                <div class="Heading">
+                    <span class="step step1">Ready,</span> <span class="step step2">Set,</span> <span class="step step3">Expense</span>
+                </div>
+                <div class="description">
+                    <p>
+                        <b style="color: green;">Expense categories are pre-configured!</b> When the Expenses app is installed, a set of pre-loaded expense categories are available so you can start creating expense records right away.
+                    </p>
+                </div>
+                <div class="text">
+                    <img src="/static/ss3.png" alt="">
+                </div>
+            </div>
+
+            <div class="showcase show_fifth">
+                <div class="Heading">
+                    <p>Unlock Your <br><span style="color: green;">Financial Freedom</span> Today</p>
+                </div>
+                <div class="outer-container">
+                    <a class="button" href="{{ url_for('signup') }}">
+                        Start Now - It's free
+                    </a>
+                    
+                    
+                </div>
+            </div>
+
+
+            <footer>
+                <div class="footer_container">
+                    <div class="footer-section attribution">
+                        <h3>Attributions</h3>
+                        <p>Icons by <a href="https://icons8.com/" target="_blank">icons8</a></p>
+                        <p>JavaScript library by <a href="https://jquery.com/" target="_blank">jQuery</a></p>
+                        <p>CSS framework by <a href="https://getbootstrap.com/" target="_blank" class="text-white">Bootstrap</a></p>
+                
+                    </div>
+                    <div class="line">
+                        <h3>Follow Me</h3>
+                        <p><a href="https://linkedin.com/in/sarvesh-gandhere-a31b68209" target="_blank">LinkedIn</a></p>
+                        <p><a href="https://github.com/SarveshG2002" target="_blank">GitHub</a></p>
+                        <p><a href="https://www.instagram.com/sarwya_not_available/" target="_blank">Instagram</a></p>
+                        
+                    </div>
+                    <div class="line">
+                        <h3>Contact Me</h3>
+                        <p>Email: sarveshgandhere2002@gmail.com</p>
+                        <p>Phone: (+91) 8369350353</p>
+                    </div>
+                    <div style="width: 1px; height: 100%;background-color: aliceblue" class="horiLine"></div>
+                    <div class="line desc" style="display: flex;flex-direction: column;">
+                        <div class="headlogo">
+                            <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget"> -->
+                            <img src="../static/logo.png" alt="Budget">
+                        </div>   
+
+                        <div class="footDesc">
+                            <br>
+                            As a passionate software developer, I'm always eager to collaborate on innovative projects and share my knowledge. Feel free to reach out to discuss new ideas, potential collaborations, or any questions you might have. You can contact me via email at sarveshgandhere2002@gmail.com or by phone at (+91) 8369350353. Follow me on LinkedIn, GitHub, and Instagram to stay connected
+                        </div>
+                                           
+                    </div>
+                </div>
+            </footer>
+            
+
+
+
+            <!-- <br><br><br><br><br><br><br><br><br><br> -->
+            
+        </div>
+        
+        
+
+    </div>
+    
+    <script>
+        // $(function () {
+        //     $('[data-toggle="tooltip"]').tooltip();
+        // });
+   
+    const aside = document.getElementById("aside")
+    function ToggleMenu(){
+        if(aside.style.display=="none"){
+            aside.style.display = "flex";
+        }else{
+            aside.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+
+</html>
