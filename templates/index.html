@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Danfo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --background-color: #f6f8fd;
@@ -12,7 +19,8 @@
             --black: black;
             --green: green;
         }
-        body{
+
+        body {
             background-color: var(--background-color);
             display: flex;
             justify-content: center;
@@ -20,28 +28,153 @@
             height: 100vh;
             margin: 0;
         }
-        .box{
-            padding: 100px;
+
+        .box {
+            padding: 50px;
+            width: calc(100% - 30px);
+            max-width: 800px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(100, 100, 100, 0.1);
             border-radius: 20px;
             display: flex;
-        }
-        
 
+        }
+
+        .box .first-div {
+            height: 50vh;
+            width: 50%;
+            /* max-width: 100px; */
+            /* background-color: #673ab7; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .box .first-div img {
+            width: 80%;
+        }
+
+        .box .second-div {
+            /* background-color: aqua; */
+            width: 50%;
+            margin-top: 50px;
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-form {
+            width: 100%;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            color: #222;
+        }
+
+        input {
+            width: 100%;
+            display: block;
+            border: none;
+            border-bottom: 1px solid #999;
+            padding: 6px 30px;
+            font-family: Poppins;
+            box-sizing: border-box;
+        }
+
+        .material-icons-name {
+            font-size: 18px;
+        }
+
+
+        input,
+        select,
+        textarea {
+            outline: none;
+            appearance: unset !important;
+            -moz-appearance: unset !important;
+            -webkit-appearance: unset !important;
+            -o-appearance: unset !important;
+            -ms-appearance: unset !important;
+        }
+
+
+        .form-submit {
+            display: inline-block;
+            background: #6dabe4;
+            color: #fff;
+            border-bottom: none;
+            width: auto;
+            padding: 15px 39px;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .box .second-div form .headLine {
+            /* background-color: #673ab7; */
+            padding: 30px 0px;
+            /* top: 0; */
+            font-family: Poppins;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .box .second-div form a{
+            font-family: Poppins;
+        }
     </style>
 </head>
+
 <body>
     <div class="box">
-        <div class="image">
-
+        <div class="first-div">
+            <img src="../static/signin-image.jpg" alt="">
         </div>
-        <div class="form">
-            <form action="">
+        <div class="second-div">
+            <form method="POST" class="register-form" id="login-form">
+                <div class="headLine">
+                    Login
+                </div>
+                <div class="form-group">
+                    <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    <input type="text" name="your_name" id="your_name" placeholder="Your Name" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                    <input type="password" name="your_pass" id="your_pass" placeholder="Password" autocomplete="off">
+                </div>
+
+                <div class="form-group form-button">
+                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in">
+                </div>
+
+                <div class="form-group form-button">
+                    <a href="">Create An Account</a>
+                </div>
 
             </form>
         </div>
-        
+
     </div>
 </body>
+
 </html>
