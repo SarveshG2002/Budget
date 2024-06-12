@@ -1,9 +1,10 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy  # Import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS  # Import CORS
 from context_processors import sidebar, username
 
-
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 app.static_folder = 'static'
 
@@ -15,8 +16,6 @@ app.secret_key = '1234567890987654321'
 app.context_processor(sidebar)
 app.context_processor(username)
 
-
-
 # Import routes from authRoute.py
 from authRoute import *
 from paymentRoute import *
@@ -25,4 +24,3 @@ from categoryRoute import *
 
 if __name__ == '__main__':
     app.run(host='192.168.0.108', port=8080)
-    # app.run()

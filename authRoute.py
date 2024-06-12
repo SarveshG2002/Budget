@@ -36,6 +36,34 @@ def login():
         # Render the login page
         return render_template('login.html')
     
+
+@app.route('/api/login', methods=['POST'])
+def apiLogin():
+    if request.method == 'POST':
+        data = request.get_json()  # Get JSON data from the request
+        username = data.get('username')
+        password = data.get('password')
+
+        # Query the User model to find a user with the given username
+        user = Users.query.filter_by(username=username).first()
+        # print(user.password)
+        # print(password)
+        # print(user.username)
+        # print(user.password==password)
+        
+        if user and user.password == password:
+            # Store user information in session
+
+            # Return a success response
+            return jsonify({"status": "success", "message": "Login successful"})
+        else:
+            # Return a failure response
+            return jsonify({"status": "error", "message": "Invalid username or password"})
+
+    # For non-POST methods, return method not allowed
+    return jsonify({"status": "error", "message": "Method not allowed"})
+       
+    
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
