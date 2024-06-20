@@ -21,6 +21,7 @@ from authRoute import *
 from paymentRoute import *
 from accountsRoute import *
 from categoryRoute import *
+from toDoApiRputes import *
 
 if __name__ == '__main__':
     app.run(host='192.168.0.108', port=8080)
