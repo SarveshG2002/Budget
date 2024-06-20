@@ -24,4 +24,4 @@ from categoryRoute import *
 from toDoApiRputes import *
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.108', port=8080)
+    app.run(host='192.168.0.104', port=8080)
