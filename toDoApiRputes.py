@@ -47,7 +47,7 @@ def addtodayTask():
 @app.route('/api/getTodayTasks', methods=['POST'])
 def get_today_tasks():
     try:
-        print("getting data")
+        
         data = request.get_json()
         username = data.get('username')
 
@@ -66,6 +66,31 @@ def get_today_tasks():
         tasks_list = [task.to_dict() for task in tasks]
 
         return jsonify({"tasks": tasks_list, "success": True})
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
+
+
+@app.route('/api/updateTask', methods=['POST'])
+def update_task():
+    try:
+        data = request.get_json()
+        task_id = data.get('id')
+        new_task = data.get('task')
+        # Retrieve the task from the database
+        task = Todaytask.query.get(task_id)
+
+        if not task:
+            return jsonify({"message": "Task not found", "success": False})
+
+        # Update the task attributes
+        task.task = new_task
+        task.created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        # Commit changes to the database
+        db.session.commit()
+
+        return jsonify({"message": "Task updated successfully", "success": True})
+
     except Exception as e:
         return jsonify({"message": str(e), "success": False})
 
