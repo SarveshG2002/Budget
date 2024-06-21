@@ -42,3 +42,30 @@ def addtodayTask():
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": str(e), "success": False})
+
+
+@app.route('/api/getTodayTasks', methods=['POST'])
+def get_today_tasks():
+    try:
+        print("getting data")
+        data = request.get_json()
+        username = data.get('username')
+
+        # Validate the username
+        user = Users.query.filter_by(username=username).first()
+        if not user:
+            return jsonify({"message": "Invalid username", "success": False})
+
+        # Get current date
+        today_date = date.today().strftime('%Y-%m-%d')
+
+        # Query the database for tasks with today's date and the given username
+        tasks = Todaytask.query.filter_by(created_date=today_date, username=username).order_by(Todaytask.id.desc()).all()
+
+        # Convert tasks to a list of dictionaries
+        tasks_list = [task.to_dict() for task in tasks]
+
+        return jsonify({"tasks": tasks_list, "success": True})
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
+
