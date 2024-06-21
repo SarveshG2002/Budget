@@ -93,4 +93,28 @@ def update_task():
 
     except Exception as e:
         return jsonify({"message": str(e), "success": False})
+    
+@app.route('/api/updateTaskStatus', methods=['POST'])
+def update_task_status():
+    try:
+        data = request.get_json()
+        taskId = data.get('taskId')
+        newStatus = data.get('newStatus')
+
+        # Validate if the task belongs to the logged-in user
+        task = Todaytask.query.filter_by(id=taskId).first()
+        if not task:
+            return jsonify({"message": "Task not found", "success": False}), 404
+        
+        # Update task status
+        task.status = newStatus
+        
+        # Commit changes to the database
+        db.session.commit()
+
+        return jsonify({"message": "Task status updated successfully", "success": True})
+
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
+
 
