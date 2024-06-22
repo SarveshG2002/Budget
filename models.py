@@ -78,3 +78,29 @@ class Todaytask(db.Model):
             'created_time': self.created_time,
             'created_at': self.created_at
         }
+
+
+class Dailytask(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    dailytask = db.Column(db.String(255), nullable=False)
+    user_id = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(255), nullable=False)
+    status = db.Column(db.String(50), nullable=False)
+    created_date = db.Column(db.String(255), nullable=False)
+    created_time = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return f"<DailyTask id={self.id}, dailytask={self.dailytask}, user_id={self.user_id}, username={self.username}, status={self.status}, created_date={self.created_date}, created_time={self.created_time}, created_at={self.created_at}>"
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'dailytask': self.dailytask,
+            'user_id': self.user_id,
+            'username': self.username,
+            'status': self.status,
+            'created_date': self.created_date,
+            'created_time': self.created_time,
+            'created_at': self.created_at
+        }
