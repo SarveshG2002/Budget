@@ -159,3 +159,24 @@ def add_dailytask():
         return jsonify({"message": str(e), "success": False})
 
 
+
+@app.route('/api/getdailytasks', methods=['POST'])
+def get_all_dailytasks():
+    try:
+        data = request.get_json()
+        username = data.get('username')
+
+        user = Users.query.filter_by(username=username).first()
+        if not user:
+            return jsonify({"message": "Invalid username", "success": False})
+        # Query all tasks from the database
+        tasks = Dailytask.query.filter_by(username=username).order_by(Dailytask.id.desc()).all()
+        # Convert the tasks to a list of dictionaries
+        tasks_list = [task.to_dict() for task in tasks]
+
+        return jsonify({"tasks": tasks_list, "success": True})
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
+
+
+
