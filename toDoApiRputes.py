@@ -177,6 +177,35 @@ def get_all_dailytasks():
         return jsonify({"tasks": tasks_list, "success": True})
     except Exception as e:
         return jsonify({"message": str(e), "success": False})
+    
+
+@app.route('/api/updateDailytask', methods=['POST'])
+def update_dailytask():
+    data = request.get_json()
+
+    task_id = data.get('task_id')
+    username = data.get('username')
+    updated_task_text = data.get('task')
+
+    # Validate the username
+    user = Users.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({"message": "Invalid username", "success": False}), 400
+
+    # Validate the task_id
+    task = Dailytask.query.filter_by(id=task_id, user_id=user.id).first()
+    if not task:
+        return jsonify({"message": "Task not found or you do not have permission to update this task", "success": False}), 404
+
+    # Update the task
+    try:
+        task.dailytask = updated_task_text
+        db.session.commit()
+        
+        return jsonify({"message": "Task updated successfully", "success": True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": str(e), "success": False})
 
 
 
