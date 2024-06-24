@@ -219,26 +219,39 @@ def getTodayDailyTask():
     if not user:
         return jsonify({"message": "User Not Found", "status": False})
 
-    today = date.today().isoformat()
+    query = text("""
+    SELECT dailytask.*,
+           COALESCE(task_counts.todays_task_count, 0) AS todays_task_count,
+           task_counts.newTask
+    FROM dailytask
+    LEFT JOIN (
+        SELECT dailytask_id,
+               COUNT(id) AS todays_task_count,
+               SUBSTRING_INDEX(GROUP_CONCAT(task ORDER BY created_at DESC), ',', 1) AS newTask
+        FROM todays_daily_task
+        WHERE created_date = CURDATE()
+        GROUP BY dailytask_id
+    ) AS task_counts ON dailytask.id = task_counts.dailytask_id
+    WHERE dailytask.user_id = :user_id
+    """)
 
-    tasks = db.session.query(
-        Dailytask,
-        func.coalesce(func.count(TodaysDailyTask.id), 0).label('todays_task_count')
-    ).outerjoin(
-        TodaysDailyTask,
-        (Dailytask.id == TodaysDailyTask.dailytask_id) & 
-        (TodaysDailyTask.created_date == today)
-    ).filter(
-        Dailytask.user_id == user.id
-    ).group_by(
-        Dailytask.id
-    ).all()
+    result = db.session.execute(query, {"user_id": user.id})
+    
+    tasks = []
+    for row in result:
+        task_dict = {
+            'id': row.id,
+            'dailytask': row.dailytask,
+            'user_id': row.user_id,
+            'username': row.username,
+            'status': row.status,
+            'created_date': row.created_date,
+            'created_time': row.created_time,
+            'created_at': row.created_at,
+            'todays_task_count': row.todays_task_count,
+            'newTask': row.newTask
+        }
+        tasks.append(task_dict)
 
-    result = []
-    for task, count in tasks:
-        task_dict = task.to_dict()
-        task_dict['todays_task_count'] = count
-        result.append(task_dict)
-
-    return jsonify({"tasks": result, "status": True})
+    return jsonify({"tasks": tasks, "status": True})
 
