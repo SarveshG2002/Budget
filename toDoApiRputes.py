@@ -190,12 +190,12 @@ def update_dailytask():
     # Validate the username
     user = Users.query.filter_by(username=username).first()
     if not user:
-        return jsonify({"message": "Invalid username", "success": False}), 400
+        return jsonify({"message": "Invalid username", "success": False})
 
     # Validate the task_id
     task = Dailytask.query.filter_by(id=task_id, user_id=user.id).first()
     if not task:
-        return jsonify({"message": "Task not found or you do not have permission to update this task", "success": False}), 404
+        return jsonify({"message": "Task not found or you do not have permission to update this task", "success": False})
 
     # Update the task
     try:
