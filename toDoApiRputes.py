@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for, session,jsonify
 from flask_app import app, db
-from models import Account,Users,Todaytask,Dailytask
+from models import Account,Users,Todaytask,Dailytask,TodaysDailyTask
 from decorators import login_required
 from datetime import datetime,date,time
+from sqlalchemy import func, text
 
 @app.route('/api/addtodayTask', methods=['POST'])
 def addtodayTask():
@@ -208,4 +209,36 @@ def update_dailytask():
         return jsonify({"message": str(e), "success": False})
 
 
+
+@app.route("/api/getTodayDailyTask", methods=["POST"])
+def getTodayDailyTask():
+    data = request.get_json()
+    username = data.get("username")
+
+    user = Users.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({"message": "User Not Found", "status": False})
+
+    today = date.today().isoformat()
+
+    tasks = db.session.query(
+        Dailytask,
+        func.coalesce(func.count(TodaysDailyTask.id), 0).label('todays_task_count')
+    ).outerjoin(
+        TodaysDailyTask,
+        (Dailytask.id == TodaysDailyTask.dailytask_id) & 
+        (TodaysDailyTask.created_date == today)
+    ).filter(
+        Dailytask.user_id == user.id
+    ).group_by(
+        Dailytask.id
+    ).all()
+
+    result = []
+    for task, count in tasks:
+        task_dict = task.to_dict()
+        task_dict['todays_task_count'] = count
+        result.append(task_dict)
+
+    return jsonify({"tasks": result, "status": True})
 
