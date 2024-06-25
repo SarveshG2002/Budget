@@ -255,3 +255,61 @@ def getTodayDailyTask():
 
     return jsonify({"tasks": tasks, "status": True})
 
+
+@app.route("/api/insertTodayDailyTask", methods=["POST"])
+def insertTodayDailyTask():
+    data = request.get_json()
+    task_id = data.get("id")
+    task_text = data.get("task")
+
+    # Fetch the original daily task
+    daily_task = Dailytask.query.get(task_id)
+    if not daily_task:
+        return jsonify({"message": "Daily task not found", "status": False})
+
+    # Create new TodaysDailyTask
+    now = datetime.now()
+    new_task = TodaysDailyTask(
+        dailytask_id=str(task_id),
+        user_id=daily_task.user_id,
+        username=daily_task.username,
+        task=task_text,
+        status="Pending",
+        created_date=now.strftime("%Y-%m-%d"),
+        created_time=now.strftime("%H:%M:%S"),
+        created_at=now.strftime("%Y-%m-%d %H:%M:%S")
+    )
+
+    try:
+        db.session.add(new_task)
+        db.session.commit()
+        return jsonify({"message": "Task inserted successfully", "status": True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"Error inserting task: {str(e)}", "status": False})
+    
+
+@app.route("/api/updateTodayDailyTask", methods=["POST"])
+def updateTodayDailyTask():
+    data = request.get_json()
+    task_id = data.get("id")
+    task_text = data.get("task")
+
+    # Find the most recent task for today
+    today = datetime.now().strftime("%Y-%m-%d")
+    task = TodaysDailyTask.query.filter_by(
+        dailytask_id=str(task_id),
+        created_date=today
+    ).order_by(TodaysDailyTask.created_at.desc()).first()
+
+    if not task:
+        return jsonify({"message": "No task found for today", "status": False})
+
+    try:
+        task.task = task_text
+        db.session.commit()
+        return jsonify({"message": "Task updated successfully", "status": True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"Error updating task: {str(e)}", "status": False})
+
