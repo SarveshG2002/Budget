@@ -220,18 +220,28 @@ def getTodayDailyTask():
         return jsonify({"message": "User Not Found", "status": False})
 
     query = text("""
-    SELECT dailytask.*,
-           COALESCE(task_counts.todays_task_count, 0) AS todays_task_count,
-           task_counts.newTask
-    FROM dailytask
-    LEFT JOIN (
-        SELECT dailytask_id,
-               COUNT(id) AS todays_task_count,
-               SUBSTRING_INDEX(GROUP_CONCAT(task ORDER BY created_at DESC), ',', 1) AS newTask
-        FROM todays_daily_task
-        WHERE created_date = CURDATE()
-        GROUP BY dailytask_id
-    ) AS task_counts ON dailytask.id = task_counts.dailytask_id
+    SELECT
+    dailytask.*,
+    COALESCE(task_counts.todays_task_count, 0) AS todays_task_count,
+    task_counts.newTask,
+    COALESCE(task_counts.status, 'Pending') AS actual_status
+FROM
+    dailytask
+LEFT JOIN (
+    SELECT 
+        dailytask_id,
+        COUNT(id) AS todays_task_count,
+        SUBSTRING_INDEX(GROUP_CONCAT(task ORDER BY created_at DESC), ',', 1) AS newTask,
+        MAX(status) AS status
+    FROM
+        todays_daily_task
+    WHERE
+        created_date = CURDATE()
+    GROUP BY
+        dailytask_id
+) AS task_counts
+ON
+    dailytask.id = task_counts.dailytask_id
     WHERE dailytask.user_id = :user_id
     """)
 
@@ -249,7 +259,8 @@ def getTodayDailyTask():
             'created_time': row.created_time,
             'created_at': row.created_at,
             'todays_task_count': row.todays_task_count,
-            'newTask': row.newTask
+            'newTask': row.newTask,
+            'actual_status':row.actual_status
         }
         tasks.append(task_dict)
 
@@ -261,6 +272,7 @@ def insertTodayDailyTask():
     data = request.get_json()
     task_id = data.get("id")
     task_text = data.get("task")
+    task_status = data.get("status", "Pending")
 
     # Fetch the original daily task
     daily_task = Dailytask.query.get(task_id)
@@ -274,7 +286,7 @@ def insertTodayDailyTask():
         user_id=daily_task.user_id,
         username=daily_task.username,
         task=task_text,
-        status="Pending",
+        status=task_status,
         created_date=now.strftime("%Y-%m-%d"),
         created_time=now.strftime("%H:%M:%S"),
         created_at=now.strftime("%Y-%m-%d %H:%M:%S")
@@ -294,6 +306,7 @@ def updateTodayDailyTask():
     data = request.get_json()
     task_id = data.get("id")
     task_text = data.get("task")
+    task_status = data.get("status", "Pending")
 
     # Find the most recent task for today
     today = datetime.now().strftime("%Y-%m-%d")
@@ -304,11 +317,12 @@ def updateTodayDailyTask():
 
     if not task:
         return jsonify({"message": "No task found for today", "status": False})
-
+    
     try:
         task.task = task_text
+        task.status = task_status
         db.session.commit()
-        return jsonify({"message": "Task updated successfully", "status": True})
+        return jsonify({"message": "Task updated successfully"+task.status, "status": True})
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": f"Error updating task: {str(e)}", "status": False})
