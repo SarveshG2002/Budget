@@ -60,12 +60,13 @@ class Todaytask(db.Model):
     user_id = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(50), nullable=False)
+    important = db.Column(db.Integer, nullable=False)
     created_date = db.Column(db.String(255), nullable=False)
     created_time = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f"<Todaytask id={self.id}, task={self.task}, user_id={self.user_id}, username={self.username}, status={self.status}, created_date={self.created_date}, created_time={self.created_time}, created_at={self.created_at}>"
+        return f"<Todaytask id={self.id}, task={self.task}, user_id={self.user_id}, username={self.username}, status={self.status}, important={self.important}, created_date={self.created_date}, created_time={self.created_time}, created_at={self.created_at}>"
 
     def to_dict(self):
         return {
@@ -74,6 +75,7 @@ class Todaytask(db.Model):
             'user_id': self.user_id,
             'username': self.username,
             'status': self.status,
+            'important':self.important,
             'created_date': self.created_date,
             'created_time': self.created_time,
             'created_at': self.created_at

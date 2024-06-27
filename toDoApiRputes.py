@@ -11,6 +11,7 @@ def addtodayTask():
 
     username = data.get('username')
     task_text = data.get('task')
+    important = data.get('important',0)
 
     # Validate the username
     user = Users.query.filter_by(username=username).first()
@@ -32,6 +33,7 @@ def addtodayTask():
             user_id=user.id,
             username=username,
             status=status,
+            important=important,
             created_date=today_date,
             created_time=current_time,
             created_at=current_datetime
