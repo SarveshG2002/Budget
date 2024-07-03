@@ -297,10 +297,10 @@ def insertTodayDailyTask():
     try:
         db.session.add(new_task)
         db.session.commit()
-        return jsonify({"message": "Task inserted successfully", "status": True})
+        return jsonify({"message": "Task inserted successfully", "success": True})
     except Exception as e:
         db.session.rollback()
-        return jsonify({"message": f"Error inserting task: {str(e)}", "status": False})
+        return jsonify({"message": f"Error inserting task: {str(e)}", "success": False})
     
 
 @app.route("/api/updateTodayDailyTask", methods=["POST"])
@@ -324,8 +324,89 @@ def updateTodayDailyTask():
         task.task = task_text
         task.status = task_status
         db.session.commit()
-        return jsonify({"message": "Task updated successfully"+task.status, "status": True})
+        return jsonify({"message": "Task updated successfully "+task.status, "success": True})
     except Exception as e:
         db.session.rollback()
-        return jsonify({"message": f"Error updating task: {str(e)}", "status": False})
+        return jsonify({"message": f"Error updating task: {str(e)}", "success": False})
+    
+
+
+@app.route('/api/getCombinedTasksByDate', methods=['POST'])
+def get_combined_tasks_by_date():
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        
+        page = data.get('page', 1)
+        limit = data.get('limit', 20)
+
+        # Validate inputs
+        if not username:
+            return jsonify({"message": "Username is required", "success": False}), 400
+
+        # Validate and parse the date
+        
+
+        # Calculate offset
+        offset = (page - 1) * limit
+
+        # Construct the SQL query with pagination
+        query = text("""
+        SELECT * FROM (
+            SELECT id, task, user_id, username, status, created_date, created_time, created_at, 
+                   important,
+                   NULL AS dailytask_id,
+                   'todaytask' AS source
+            FROM todaytask
+            WHERE username = :username
+
+            UNION ALL
+
+            SELECT id, task, user_id, username, status, created_date, created_time, created_at,
+                   NULL AS important,
+                   dailytask_id,
+                   'todays_daily_task' AS source
+            FROM todays_daily_task
+            WHERE username = :username
+        ) AS combined_tasks
+        ORDER BY created_at DESC
+        LIMIT :limit OFFSET :offset
+        """)
+
+        # Execute the query
+        result = db.session.execute(query, {
+            "username": username,
+            "limit": limit,
+            "offset": offset
+        })
+
+        # Process the results
+        tasks = []
+        for row in result:
+            task = {
+                "id": row.id,
+                "task": row.task,
+                "user_id": row.user_id,
+                "username": row.username,
+                "status": row.status,
+                "created_date": row.created_date,
+                "created_time": row.created_time,
+                "created_at": row.created_at,
+                "important": row.important,
+                "dailytask_id": row.dailytask_id,
+                "source": row.source
+            }
+            tasks.append(task)
+
+        # Check if there are more tasks
+        has_more = len(tasks) == limit
+
+        return jsonify({
+            "tasks": tasks, 
+            "has_more": has_more,
+            "success": True
+        })
+
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
 
