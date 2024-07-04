@@ -206,7 +206,8 @@ def dashboard():
                          """)
     result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})
     data = result.fetchall()
-    print(data);
+    # print(data);
+    
     # Placeholder for dashboard logic
     return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum,category=data)
 
