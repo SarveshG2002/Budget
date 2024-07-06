@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session,jsonify
 from flask_app import app,db
-from models import Users,Account, Category, Payment
+from models import Users,Account, Category, Payment,Todaytask,Dailytask,TodaysDailyTask
 from decorators import login_required  # Import the login_required decorator
 from sqlalchemy import func,text
 from datetime import date,datetime,timedelta
@@ -206,10 +206,18 @@ def dashboard():
                          """)
     result = db.session.execute(expense_query, {'user_id': session['user_id'], 'type':"expense"})
     data = result.fetchall()
+
+    today_date = date.today().strftime('%Y-%m-%d')
+    tasks = Todaytask.query.filter_by(created_date=today_date, username=session["username"]).order_by(Todaytask.id.desc()).all()
+    tasks_list = [task.to_dict() for task in tasks]
     # print(data);
+
+    tasks = Dailytask.query.filter_by(username=session["username"]).order_by(Dailytask.id.desc()).all()
+    # Convert the tasks to a list of dictionaries
+    daily_tasks_list = [task.to_dict() for task in tasks]
     
     # Placeholder for dashboard logic
-    return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum,category=data)
+    return render_template('dashboard.html',accounts=zip(accounts, colors),total_exp=expense_sum,today_exp=today_exp,total_inc=income_sum,month_income_sum=month_income_sum,month_expense_sum=month_expense_sum,category=data,today_task=tasks_list,daily_tasks=daily_tasks_list)
 
 @app.route('/logout')
 def logout():
