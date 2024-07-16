@@ -12,14 +12,14 @@ def addtodayTask():
     username = data.get('username')
     task_text = data.get('task')
     important = data.get('important',0)
-
+    today_date = data.get('today_date',date.today().strftime('%Y-%m-%d'))
     # Validate the username
     user = Users.query.filter_by(username=username).first()
     if not user:
         return jsonify({"message": "Invalid username", "success": False})
 
     # Get current date, time, and datetime
-    today_date = date.today()
+    # today_date = 
     current_time = datetime.now().time()
     current_datetime = datetime.now()
 
@@ -135,7 +135,7 @@ def add_dailytask():
         return jsonify({"message": "Invalid username", "success": False}), 400
 
     # Get current date, time, and datetime
-    today_date = date.today()
+    today_date = date.today().strftime('%Y-%m-%d')
     current_time = datetime.now().time()
     current_datetime = datetime.now()
 
