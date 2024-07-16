@@ -3,7 +3,7 @@ from flask_app import app, db
 from models import Account,Users,Todaytask,Dailytask,TodaysDailyTask
 from decorators import login_required
 from datetime import datetime,date,time
-from sqlalchemy import func, text
+from sqlalchemy import func, text ,and_
 
 @app.route('/api/addtodayTask', methods=['POST'])
 def addtodayTask():
@@ -67,6 +67,35 @@ def get_today_tasks():
 
         # Convert tasks to a list of dictionaries
         tasks_list = [task.to_dict() for task in tasks]
+
+        return jsonify({"tasks": tasks_list, "success": True})
+    except Exception as e:
+        return jsonify({"message": str(e), "success": False})
+
+@app.route('/api/getFutureTasks', methods=['POST'])
+def get_future_tasks():
+    try:
+        
+        data = request.get_json()
+        username = data.get('username')
+
+        # Validate the username
+        user = Users.query.filter_by(username=username).first()
+        if not user:
+            return jsonify({"message": "Invalid username", "success": False})
+
+        # Get current date
+        today_date = date.today().strftime('%Y-%m-%d')
+
+        # Query the database for tasks with today's date and the given username
+        tasks = Todaytask.query.filter(
+            and_(Todaytask.created_date > today_date, Todaytask.username == username)
+        ).order_by(Todaytask.id.desc()).all()
+
+        # Convert tasks to a list of dictionaries
+        tasks_list = [task.to_dict() for task in tasks]
+
+        print(tasks_list)
 
         return jsonify({"tasks": tasks_list, "success": True})
     except Exception as e:
